@@ -29,6 +29,14 @@ form{
 	border-radius:4px;
 	width:100%;
 	display: inline-block;
+	border: solid 2px transparent;
+}
+
+.input-default:focus{
+	box-shadow: none;
+	border: solid 2px #fec107;
+	outline: none;
+	background: white;
 }
 .container-input{
 	padding-top:15px;

@@ -69,3 +69,37 @@ form{
 .row-form{
 	margin-bottom:40px;
 }
+
+.solapa-rol{
+	background: #f6f2f3;
+	color:#65a767;
+	width:110px;
+	height:110px;
+	display: inline-block;
+	box-shadow:4px 4px 10px 1px #547355;
+	border-radius:0px 0px 10px 0px;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
+	position: relative;
+	top:-55px;
+}
+
+.solapa-rol span{
+	font-size: 4em;
+	line-height:152px;
+	-webkit-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	position: absolute;
+}
+
+.row-solapa{
+	margin-bottom:40px;
+	text-align: center;
+}
+
+
+

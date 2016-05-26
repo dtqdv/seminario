@@ -1,6 +1,7 @@
 body{
-	background:#65a767;
+	background:#17861a;
 	font-size:1rem;
+	font-family: 'Open Sans', sans-serif;
 }
 
 
@@ -9,6 +10,17 @@ form{
 	border-radius:4px;
 	box-shadow:4px 4px 10px 1px #547355;
 	padding:30px 0px;
+}
+
+form h1{
+	padding-top:15px;
+	padding-bottom: 0;
+	padding-left: 0;
+	padding-right: 0;
+	margin:0; 
+	font-weight: lighter;
+	font-size: 2.5em;
+
 }
 
 .text-center{
@@ -30,6 +42,13 @@ form{
 	width:100%;
 	display: inline-block;
 	border: solid 2px transparent;
+	font-weight: lighter;
+}
+
+.input-description{
+	font-size: 1.35em;
+	padding:10px 0px;
+	padding-left: 10px;
 }
 
 .input-default:focus{
@@ -43,14 +62,9 @@ form{
 	padding-bottom: 15px;
 }
 
-.description-form{
-	margin:0px;
-}
-
 .btn-send{
 	text-transform: uppercase;
 	background:#fec107;
-	color:#fff;
 	text-align: center;
 	padding-top:15px;
 	padding-bottom: 15px;
@@ -60,10 +74,29 @@ form{
 	border-radius: 4px;
 	box-shadow:4px 4px 10px 1px #cecece;
 	width:100%;
+	color:#fff;
+}
+
+.btn-send:focus{
+	outline: none;
+}
+
+.btn-send:hover{
+	color: black;
 }
 
 .footer-form{
 	color:white;
+	font-size:1.6em;
+	font-weight: lighter;
+}
+
+.footer-form:last-child{
+	margin-bottom: 40px;
+}
+
+.footer-form strong{
+	font-weight:600;
 }
 
 .row-form{
@@ -100,6 +133,13 @@ form{
 	margin-bottom:40px;
 	text-align: center;
 }
+figure{
+	margin:0;
+	padding:30px 0px;
+}
 
+.wrapper-message{
 
-
+	font-size:2.3em;
+	font-weight: lighter;
+}

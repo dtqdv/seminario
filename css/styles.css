@@ -99,6 +99,13 @@ form h1{
 	font-weight:600;
 }
 
+.row-form a{
+	font-size: 1.6em;
+	color:black;
+	font-weight: lighter;
+	display: inline-block;
+}
+
 .row-form{
 	margin-bottom:40px;
 }
@@ -144,4 +151,16 @@ figure{
 
 	font-size:2.3em;
 	font-weight: lighter;
+}
+
+.form-footer-log a{
+	color:white;
+}
+
+.form-footer-log a:hover{
+	color:white;
+}
+
+.bold{
+	font-weight: bold;
 }

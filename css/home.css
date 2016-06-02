@@ -1,0 +1,283 @@
+
+body{
+	background:#65a767;
+	font-size: 1em;
+}
+form{
+	background: #ffffff;
+	border-radius:4px;
+	box-shadow:4px 4px 10px 1px #547355;
+	padding:30px 0px;
+}
+
+.text-center{
+	text-align: center;
+}
+
+.block{
+	display: block;
+}
+
+.input-default{
+	padding-left:20px;
+	padding-top:5px;
+	padding-bottom: 5px;
+	border:none;
+	background: #f9f9f9;
+	font-size:1.7em;
+	border-radius:4px;
+	width:100%;
+	display: inline-block;
+}
+.container-input{
+	padding-top:15px;
+	padding-bottom: 15px;
+}
+
+.description-form{
+	margin:0px;
+}
+
+.btn-send{
+	background:#fec107;
+	color:#fff;
+	text-align: center;
+	padding-top:15px;
+	padding-bottom: 15px;
+	padding-left:10px;
+	font-size:1.8em;
+	border:none;
+	border-radius: 4px;
+	box-shadow:4px 4px 10px 1px #cecece;
+	width:100%;
+}
+
+.footer-form{
+	color:white;
+}
+
+.row-form{
+	margin-bottom:40px;
+}
+.logfooter span{
+	opacity: 0.6;
+}
+.logfooter span a{
+	color: white;
+}
+.logfooter>div+div+div a{
+	display: inline-block;
+	margin-top: 10px;
+}
+
+.log form a{
+	color: black;
+}
+/*Home*/
+header{
+	background-color: #2196F3;
+	color: white;
+	text-transform: uppercase;
+}
+header>div.container,section.que-es.container,section.pasos>div.container,section.detalles>div.container,
+section.prode>div.container, section.personalizacion>div.container,section.tabla>div.container{
+	width: 60%;
+}
+header ul{
+	list-style: none;
+	margin: 55px auto 60px;
+}
+header ul li{
+	display: inline-block;
+	padding-right: 10%;
+}
+header ul li a:hover,header ul li a{
+	color: white !important;
+	letter-spacing: 2px;
+	font-size: 1.250em;
+}
+header h1{
+	margin-top: 70px;
+	font-size: 5.2rem;
+	letter-spacing: 3px;
+	font-family: 'FranklinGothic-Demi';
+}
+header p{
+	margin: 25px auto 150px;
+	letter-spacing: 2px;
+	font-size: 1.30em;
+}
+section.que-es{
+	background-color: white;
+	color: black;
+
+}
+section.que-es h2{
+	margin: 125px auto 70px;
+	font-family: 'Roboto';
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 3.3em;
+
+}
+section.que-es>div.container{
+	width: 45%;
+}
+section.que-es p{
+	letter-spacing: 1px;
+	text-align: center;
+	font-family: 'Roboto light';
+	font-size: 1.9em;
+	line-height: 2.4em;
+}
+section.que-es>div:first-child p+p{
+	margin: 50px auto 150px;
+}
+section.pasos{
+	background-color: #01C853;
+	color: white;
+	padding-bottom: 165px;
+}
+section.pasos h2{
+	font-family: 'Roboto';
+	font-weight: bold;
+	font-size: 3em;
+	text-transform: uppercase;
+	margin: 80px auto 0;
+}
+section.pasos figure{
+	margin-top: 80px;
+}
+section.pasos h3{
+	font-family: 'Roboto';
+	text-transform: uppercase;
+	font-size: 1.8em;
+	font-weight: bold;
+	margin: 25px auto 30px;
+	letter-spacing: 1px;
+}
+section.pasos h3+p{
+	font-family: 'Roboto light';
+	font-size: 1.9em;
+	text-align: center;
+	width: 86%;
+	margin: 0 7% 0;
+	letter-spacing: 1px;
+}
+section.tabla{
+	background-color: white;
+}
+section.tabla h2{
+	font-size: 3em;
+	font-family: 'Roboto';
+	text-transform: uppercase;
+	font-weight: bold;
+	margin: 170px 0 100px;
+}
+section.tabla table{
+	background-color: #fcb116;
+	border-radius: 8px;
+	color: white;
+}
+.tabla-yellow{
+	width: 80%;
+	display: inline-block;
+}
+.tabla-content{
+	width: 100%;
+}
+section.tabla a{
+	display: inline-block;
+	color: white;
+	background-color: #4CB050;
+	padding: 5px 40px;
+	font-size: 1.3em;
+	box-shadow: 6px 4px 11px 0 rgba(0,0,0,0.16);
+	margin: 25px auto 260px;
+}
+section.detalles{
+	background-color: #66BB6A;
+	color: white;
+	padding: 80px 0 95px;
+}
+section.personalizacion{
+	background-color: #43a047;
+	color: white;
+	padding: 80px 0 95px;
+}
+section.prode{
+	background-color: #4CB050;
+	color: white;
+	padding: 80px 0 95px;
+}
+section.detalles .container, section.personalizacion .container, section.prode .container{
+	width: 80% !important;
+}
+section.personalizacion img{
+	padding-bottom: 30px;
+}
+section.prode img{
+	padding-top: 30px;
+}
+section.detalles h2, section.personalizacion h2, section.prode h2{
+	font-family: 'Roboto';
+	font-weight: bold;
+	font-size: 3em;
+	text-transform: uppercase;
+	margin: 0 0 20px;
+	padding: 0;
+}
+section.detalles h2+p, section.personalizacion h2+p, section.prode h2+p{
+	font-family: 'Roboto light';
+	font-size: 1.8em;
+	letter-spacing: 1px;
+	line-height: 30px;
+}
+section.sponsors{
+	background-color: #f2f2f2;
+}
+section.sponsors ul{
+	list-style: none;
+}
+section.sponsors ul li{
+	display: inline-block;
+}
+section.sponsors ul li a{
+	display: inline-block;
+}
+section.sponsors ul li a img{
+	width: 100%;
+}
+footer{
+	background-color: #2196F3;
+	color: white;
+	padding-top: 30px;
+	font-family: 'Roboto';
+}
+footer h3{
+	text-transform: uppercase;
+	font-style: italic;
+}
+footer>div>div>div>img{
+	margin: 60px 0 70px;
+}
+footer ul{
+	list-style: none;
+	padding: 0;
+}
+footer ul li{
+	margin-bottom: 15px;
+	letter-spacing: 1px;
+	font-size: 1.2em;
+}
+div.redes ul li{
+	display: inline-block;
+}
+footer ul li a{
+	color: white;
+	font-size: 1.7em;
+}
+.footer-mobile{
+	text-align: center;
+	font-size: 1.3em;
+}

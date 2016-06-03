@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/crear.css">
+    <link rel="stylesheet" href="css/paso2.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,700italic,800,800italic,300italic,300' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -36,16 +36,60 @@
 <div id="fondo_loco" class="container-fluid">
     <div class="col-md-8 col-md-offset-1 m-t-6">
         <h1 class="display-1" ><strong>CREAR TORNEO</strong></h1>
-        <p class="display-2">1.Nombre</p>
+        <p class="display-2">2.Detalles</p>
     </div>
 </div>
 <div class="container">
     <div class="col-xs-7 crear-contenido">
-        <div class="col-md-11 p-t-1">
-            <p>Para empezar a crear tu torneo personalizado, ingresà el <strong>nombre</strong> con el que lo identificaran. Este va a estar disponible en el buscador.</p>
-            <input class="col-xs-12 form-control input-torneo input-lg" type="text" placeholder="Ingresá el nombre de tu torneo" value="Torneo DaVinci">
-            <button class="btn btn-warning btn-lg pull-right">Siguiente</button>
-        </div>
+        <form action="#" method="post" class="form-group row col-md-9">
+            <div class="m-t-4-5">
+                <h2>Sexo:</h2>
+                <input type="radio" name="sexo" id="femenino" value="Femenino"><label for="femenino"><span class="radio"></span>Femenino</label>
+                <input type="radio" name="sexo" id="masculino" value="Masculino"><label for="masculino"><span class="radio empujar_izquierda"></span>Masculino</label>
+            </div>
+            <div class="m-t-4-5">
+                <h2>Tipo:</h2>
+                <select class="form-control input-lg" name="tipo">
+                    <option value="liga">Liga</option>
+                    <option value="eliminatoria">Eliminatoria</option>
+                </select>
+            </div>
+            <div class="m-t-4-5">
+                <h2>Categoría:</h2>
+                <select class="form-control input-lg" name="tipo">
+                    <option value="mezcladito">Mezcladito</option>
+                    <option value="sin_categoria">Sin categoria</option>
+                    <option value="sub20">Sub 20</option>
+                    <option value="sub19">Sub 19</option>
+                    <option value="sub18">Sub 18</option>
+                    <option value="sub17">Sub 17</option>
+                </select>
+            </div>
+            <div class="m-t-4-5">
+                <h2>Dirección:</h2>
+                <input type="text" class="form-control input-lg" placeholder="Ubicación del torneo">
+            </div>
+            <div class="m-t-4-5">
+                <h2>Fecha de inicio</h2>
+                <input class="form-control input-lg" type="datetime-local">
+            </div>
+            <div class="m-t-4-5">
+                <h2>Cancha</h2>
+                <input type="radio" name="cancha" id="5" value="5"><label for="5"><span class="radio"></span>5</label>
+                <input type="radio" name="cancha" id="7" value="7"><label for="7"><span class="radio empujar_izquierda_1"></span>7</label>
+                <input type="radio" name="cancha" id="9" value="9"><label for="9"><span class="radio empujar_izquierda_1"></span>9</label>
+                <input type="radio" name="cancha" id="11" value="11"><label for="11"><span class="radio empujar_izquierda_1"></span>11</label>
+            </div>
+            <div class="m-t-4-5">
+                <button class="pull-left btn btn-lg btn-warning">Anterior</button>
+                <button class="pull-right btn btn-lg btn-warning">Siguiente</button>
+            </div>
+            <div class="m-t-13-5">
+                <ul class="list-unstyled text-left ">
+                    <li><a href="#">Ayuda - Información adicional</a></li>
+                </ul>
+            </div>
+        </form>
     </div>
     <div class="col-xs-5 crear-contenido">
         <img src="img/taquito-nerd.png" alt="taquito-nerd" id="taquito-nerd">
@@ -53,13 +97,13 @@
     <div class="col-md-7 col-md-offset-3">
         <ul class="list-inline">
             <li class="circulo"></li>
-            <li class="circulo"></li>
+            <li class="circulo circulo_elegido"></li>
             <li class="circulo"></li>
             <li class="circulo"></li>
         </ul>
     </div>
     <div class="col-md-2 col-md-offset-4">
-        <img src="img/flechita.png" class="paso1" alt="Paso1">
+        <img src="img/flechita.png" class="paso2" alt="Paso2">
     </div>
 </div>
 <footer class="text-center">

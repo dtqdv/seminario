@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>DeTaquito - Crear Torneo</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/paso3.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,700italic,800,800italic,300italic,300' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div class="header">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid m-t-1 col-md-10 col-md-offset-1">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="#">loguito</a></li>
+                <li><a href="#">TORNEOS</a></li>
+                <li><a href="#">CONTACTO</a></li>
+                <li><a href="#">PRODE</a></li>
+                <li><a href="#"><img src="img/lupaverde.png" alt="lupa"></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right navbar-derecha">
+                 <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Julian123<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Notificaciones</a></li>
+                        <li><a href="#">Desloguearse</a></li>
+                    </ul>
+                 </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div id="fondo_loco" class="container-fluid">
+    <div class="col-md-8 col-md-offset-1 m-t-6">
+        <h1 class="display-1" ><strong>CREAR TORNEO</strong></h1>
+        <p class="display-2">3.Equipos</p>
+    </div>
+</div>
+<div class="container">
+    <div class="col-xs-7 crear-contenido">
+        <form action="#" method="post" class="form-group row col-md-9">
+            <div class="m-t-4-5">
+               <h2>Mínimo de equipos</h2>
+               <input type="number" class="form-control input-lg" name="min-equipos">
+               <p class="p-chico">Se requiere un mínimo obligatorio de equipos para la creación de un tornéo.</p>
+            </div>
+            <div class="m-t-4-5">
+                <h2>Máximo de equipos</h2>
+                <input type="number" class="form-control input-lg" name="max-equipos">
+            </div>
+            <div class="m-t-4-5">
+                <h2>Agregar equipos <a href="#"><img src="img/agregarverder.png" alt="agregar"></a></h2>
+                <h3>1.</h3><a class="pull-right m-r-6-4-n m-t-3-4-n" href="#"><img src="img/eliminar.png" alt="eliminar"></a>
+                <input class="col-md-offset-3 m-t-2-6-n m-t-2-l form-control input-lg buscar_equipo" placeholder="Nombre del equipo" type="text">
+                <input class="col-md-offset-3 m-t-2-l m-t-1 form-control input-lg editar_equipo" type="text" placeholder="Representante">
+                <textarea name="textarea" class="form-control m-t-2-l input-lg" id="textarea" cols="30" rows="10">Jugadores</textarea>
+            </div>
+            <div class="m-t-4-5">
+                <h3>2.</h3><a class="pull-right m-r-6-4-n m-t-3-4-n" href="#"><img src="img/eliminar.png" alt="eliminar"></a>
+                <input class="col-md-offset-3 m-t-2-6-n m-t-2-l form-control input-lg buscar_equipo" value="La Dobinetta" type="text">
+                <textarea name="textarea" class="form-control m-t-2-l input-lg" id="textarea" cols="20" rows="10"></textarea>
+            </div>
+            <div class="m-t-4-5">
+                <button class="pull-left btn btn-lg btn-warning">Anterior</button>
+                <button class="pull-right btn btn-lg btn-warning m-r-2-n">Siguiente</button>
+            </div>
+            <div class="m-t-13-5">
+                <ul class="list-unstyled text-left ">
+                    <li><a href="#">Ayuda - Información adicional</a></li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    <div class="col-xs-5 crear-contenido">
+        <img src="img/taquito-nerd.png" alt="taquito-nerd" id="taquito-nerd">
+    </div>
+    <div class="col-md-7 col-md-offset-3">
+        <ul class="list-inline">
+            <li class="circulo"></li>
+            <li class="circulo"></li>
+            <li class="circulo circulo_elegido"></li>
+            <li class="circulo"></li>
+        </ul>
+    </div>
+    <div class="col-md-2 col-md-offset-4">
+        <img src="img/flechita.png" class="paso3" alt="Paso3">
+    </div>
+</div>
+<footer class="text-center">
+    <div class="footer-above">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col col-xs-6 col-sm-3">
+                    <img src="img/logo.png" alt="logo" id="logo_footer">
+                </div>
+                <div class="footer-col col-xs-6 col-sm-3">
+                    <ul class="list-unstyled text-left">
+                        <h4>AYUDA</h4>
+                        <li><a href="#">¿Qué ofrecemos?</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Registrarse</a></li>
+                        <li><a href="#">Privacidad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col col-xs-6 col-sm-3">
+                    <ul class="list-unstyled text-left">
+                        <h4>MAPA</h4>
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Torneo</a></li>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">Log In</a></li>
+                        <li><a href="#">Registrarse</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col col-xs-6 col-sm-3">
+                    <ul class="list-inline">
+                        <h4 class="text-left">Seguinos</h4>
+                        <li class="pull-left margin-right"><a href="#"><img src="img/fb.png" alt="Facebook"></a></li>
+                        <li class="pull-left margin-right"><a href="#"><img src="img/twitter.png" alt="Twitter"></a></li>
+                        <li class="pull-left margin-right"><a href="#"><img src="img/instagram.png" alt="Instagram"></a></li>
+                        <li class="pull-left"><a href="#"><img src="img/youtube.png" alt="YouTube"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

@@ -281,3 +281,23 @@ footer ul li a{
 	text-align: center;
 	font-size: 1.3em;
 }
+
+.btn-crear{
+	background: white;
+	border-radius: 4px;
+	padding:15px 20px;
+	text-transform: uppercase;
+	display: inline-block;
+	color:#01C853;
+	box-shadow:1px 3px 10px 1px #878787;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+.btn-crear:hover{
+	color:#01C853;
+	text-decoration: none;
+}
+.wrapper-crear-btn{
+	padding-top:50px;
+	text-align: center;
+}

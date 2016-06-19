@@ -17,6 +17,7 @@ class CreateColoresTorneos extends Migration
             $table->timestamps();
             $table->integer('torneos_id')->unsigned();
             $table->foreign('torneos_id')->references('id')->on('torneos');
+            $table->string('valor' , 45);
             $table->softDeletes();
         });
     }

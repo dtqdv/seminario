@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email' , 70)->unique();
             $table->string('password' , 60);
             $table->text('descripcion')->nullable();
-            $table->enum('sexo' , ['S' , 'M']);
+            $table->enum('sexo' , ['F' , 'M']);
             $table->integer('dni');
             $table->enum('estado' , ['suspendido' , 'baneado' , 'activo']);
             $table->rememberToken();

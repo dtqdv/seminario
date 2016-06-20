@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Rol;
 class RolesTableSeeder extends Seeder
 {
     /**
@@ -11,6 +11,10 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+    	$roles = ['Administrador' , 'Organizador' , 'Jugador' , 'Personalizado'];
+    	foreach ($roles as $key => $value) {
+    		Rol::create(['valor' => $value]);
+    	}
+        
     }
 }

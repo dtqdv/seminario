@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
         		'nombre' => $faker -> name ,
         		'apellido' => $faker -> lastName ,
         		'email' => $faker -> unique() -> email ,
-        		'password' => $faker -> password ,
+        		'password' => bcrypt('1234') ,
         		'descripcion' => $faker -> paragraph ,
         		'dni' => $faker -> numberBetween($min = 20000000, $max = 60000000),
         		'sexo' => $faker -> randomElement(array('M','F')) , 

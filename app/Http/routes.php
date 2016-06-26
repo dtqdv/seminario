@@ -24,3 +24,8 @@ Route::get('crear-torneo' , [
 	'uses' => 'TorneosController@ViewCreate'
 ]);
 
+Route::post('crear-torneo/create' , [
+	'middleware' => ['auth' , 'organizador'] , 
+	'uses' => 'TorneosController@Add'
+]);
+

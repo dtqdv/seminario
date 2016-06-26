@@ -21,7 +21,6 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('crear-torneo' , [
 	'middleware' => ['auth' , 'organizador'] ,
-	function(){
-		return View('sections.crear_torneo');
-	}
+	'uses' => 'TorneosController@ViewCreate'
 ]);
+

@@ -23,13 +23,13 @@ Route::auth();
 Route::post('/login' , 'Auth\AuthController@loginDtqdv');
 Route::get('/home', 'HomeController@index');
 
-/*Route::get('crear-torneo' , [
+Route::get('crear-torneo' , [
 	'middleware' => ['auth' , 'organizador'] ,
 	'uses' => 'TorneosController@ViewCreate'
 ]);
 
-Route::post('crear-torneo/create' , [
+Route::post('crear-torneo' , [
 	'middleware' => ['auth' , 'organizador'] , 
 	'uses' => 'TorneosController@Add'
-]);*/
+]);
 

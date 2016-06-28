@@ -1,6 +1,6 @@
 <?php 
 namespace App\Dtqdv;
-
+use App\Equipo as Equipo;
 /**
 * 
 */
@@ -12,78 +12,60 @@ class CrearTorneo
 		# code...
 	}
 
-	static public function parse($data , $id = null)
+	public static function parsearEquipos($data)
 	{
+		$equiposData = [
+			'nombre' => null , 
+			'representante_id' => null ,
+			'representante_email' => null , 
+			'jugadores' => []
+		];
 		$equipos = [];
-		$c = 0;
-		foreach ($data['equipo_nombre'] as $keyEquipo => $valueEquipo) {
-			
-			//creo array modelo para retornar con nombre de equipo , jugadores y representante 
-			$equipos[$keyEquipo] = ['nombre' => null , 'jugadores' => [] , 'representante_id' => null , 'id' => null , 'representante_email'];
-			//le pongo el nombre de equipo 
-			$equipos[$keyEquipo] = ['nombre' => $valueEquipo];
-			//saco el array correspondiente a la iteracion actual para los jugadores
-			$indexJugadores = 'equipo'.$keyEquipo.'_jugador';
-			if($id != null && $c < 1){
-				$equipos[$keyEquipo]['id'] = $id;
-			}else if($id != null && $c > 0){
-				$equipos[$keyEquipo]['id'] = $id + $c;
-			} 
-			foreach ($data[$indexJugadores] as $keyJugador => $valueJugador) {
-				//recorro los jugadores y los pongo en el equipo actual
-				$equipos[$keyEquipo]['jugadores'][$keyJugador] = $valueJugador;
+		foreach ($data['nombre_equipo'] as $idxEquipo => $equipo) {
+
+			$equiposData['nombre'] = $equipo;
+			$equiposData['representante_email'] = $data['representantes_email'][$idxEquipo];
+			$equiposData['representante_id'] = $data['representantes_id'][$idxEquipo];
+			$arrayNombreJugadores = 'jugador_nombre_equipo'.$idxEquipo;
+			$arrayApellidoJugadores = 'jugador_apellido_equipo'.$idxEquipo;
+
+			foreach ($data[$arrayNombreJugadores] as $idxnombre => $nombrejugador) {
+				$apellido = $data[$arrayApellidoJugadores][$idxnombre];
+				$equiposData['jugadores'][$idxnombre] = ['nombre' => $nombrejugador , 'apellido' => $apellido];
 			}
-			//saco el array correspondiente a la iteracion actual para los representantes
-			$id_representante = 'equipo'.$keyEquipo.'_representante_id';
-			$email_representante = 'equipo'.$keyEquipo.'_representante_email';
-			//pongo el representante correspondiente a este equipo
-			$equipos[$keyEquipo]['representante_id'] = $data[$id_representante];
-			$equipos[$keyEquipo]['email_representante'] = $data[$email_representante];
-			$c++;
+			
+			$equipos[] = $equiposData;
 		}
 
-		//devuelvo el array completo y ordenado
 		return $equipos;
 	}
 
-	static public function EquiposToDatabase($data , $id = null)
+	static private function generateInsert($data , $idTorneo)
 	{
-		$equipos = Self::parse($data);
-		foreach ($equipos as $key => $value) {
-			if($id != null){
-				$equipostoreturn[] = [
-					'nombre' => $value['nombre'] , 
-					'torneos_id' => $id , 
-					'updated_at'=> date('Y-m-d H:i:s') , 
-					'created_at' => date('Y-m-d H:i:s')
-				];				
-			}else{
-			$equipostoreturn[] = [
-				'nombre' => $value['nombre'] , 
-				'updated_at'=> date('Y-m-d H:i:s') , 
-				'created_at' => date('Y-m-d H:i:s')
-			];				
-			}
-
-		}
-		return $equipostoreturn;
-	}
-
-	static public function representantes($equipos)
-	{
-		$users = [];
-		foreach ($equipos as $key => $value) {
-			$users[] = [
-				'email' => $value['email_representante'] ,
-				'password' => bcrypt('1234') ,
-				'nombre' => 'algo' ,
-				'apellido' => 'algo' ,
-				'sexo' => 'F' , 
-				'dni' => 231231 , 
-				'equipos_id' => $value['id'] 
+		$length = count($data);
+		$insert = [];
+		for ($i=1; $i < $length; $i++) { 
+			$insert = [
+				'torneos_id' => $idTorneo , 
+				'nombre' => $data[$i]['nombre']
 			];
 		}
-
-		return $users;
+		Equipo::insert($insert);
 	}
+
+	static public function insertEquipos($equiposParseados , $idTorneo)
+	{	
+		$length = count($equiposParseados);
+		if($equiposParseados > 1){
+			$idEquipo = Equipo::create([
+				'torneos_id' => $idTorneo , 
+				'nombre' => $equiposParseados[0]['nombre'] 
+			]);
+			Self::generateInsert($equiposParseados , $idTorneo);
+
+			return $idEquipo;
+		}
+	}	
+
+
 }

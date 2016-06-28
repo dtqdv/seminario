@@ -1,4 +1,4 @@
-@extends('layouts.blade')
+@extends('layouts.app')
 @section('css')
 {{Html::style('css/mi-style-crear.css')}}
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -7,7 +7,7 @@
 {{Html::script('js/crear_torneo.js')}}
 @endsection
 @section('content')
-<div id="myModal" class="modal fade" role="dialog">
+<!--<div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 <div id="myModalConfirm" class="modal fade text-center" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -63,7 +63,7 @@
                     <li><a href="#">Prode</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-search buscar"></span></a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle user-btn" data-toggle="dropdown" href="#">Julian123 <span class="glyphicon glyphicon-chevron-down"></span></a>
+                        <a class="dropdown-toggle user-btn" data-toggle="dropdown" href="#">{{$user['nombre']}} <span class="glyphicon glyphicon-chevron-down"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Contenido</a></li>
                         </ul>
@@ -76,7 +76,7 @@
 </header>
 <main>
     <div id="pasos">
-        <form action="" method="post">
+    {{Form::open(['url' => 'crear-torneo' , 'method' => 'post'])}}
         <div class="slider">
         <section id="paso-uno" class="text-center container">
             <div class="text-center"><img src="img/pasonum-1.png" alt="Paso 1"></div>
@@ -84,7 +84,7 @@
             <p>Para empezar a crear tu torneo personalizado, ingresá el <strong>nombre</strong> con el que
             lo identificarán. Este va a estar disponible en el buscador</p>
             <div>
-                <input type="text" name="nombre" placeholder="Torneo DaVinci">
+                {{Form::text('nombre' , null , ['placeholder' => 'Nombre de torneo'])}}
             </div>
         </section>
         <section id="paso-dos" class="container">
@@ -94,37 +94,30 @@
                     <div class="col-md-6">
                         <h3><span>Sexo</span> del torneo</h3>
                         <div>
-                            <input type="radio" name="sexo" id="femenino" value="Femenino"><label for="femenino"><span class="radio"></span>Femenino</label>
+                            {{Form::radio('sexo', 'F' , null , ['id' => 'femenino'])}}
+                            <label for="femenino"><span class="radio"></span>Femenino</label>
                             <div class="masc">
-                                <input type="radio" name="sexo" id="masculino" value="Masculino"><label for="masculino"><span class="radio empujar_izquierda"></span>Masculino</label>
+                                {{Form::radio('sexo' , 'M' , null , ['id' => 'masculino'])}}
+                                <label for="masculino"><span class="radio empujar_izquierda"></span>Masculino</label>
                             </div>
                         </div>
                         <div>
-                            <select name="tipo">
-                                <option disabled selected>Tipo</option>
-                                <option>opcion</option>
-                            </select>
+                        {{Form::text('precio_inscripcion' , null , ['placeholder' => 'Precio de inscripcion'])}}
                         </div>
                         <div>
-                            <select name="categoria">
-                                <option disabled selected>Categoría</option>
-                                <option>opcion</option>
-                            </select>
+                        {{Form::select('categoria', array('+18' => '+18', '+30' => '+30' , 'libre' => 'value' , 'sub-18' => 'sub-18'))}}
                         </div>
                         <div>
-                            <input type="text" name="direccion" placeholder="Dirección">
+                        {{Form::text('lugar' , null , ['placeholder' => 'Direccion'])}}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <h3><span>Fecha</span> de inicio</h3>
                         <div>
-                            <input type="date">
+                            {{Form::text('fecha_inicio' , null , ['placeholder' => 'Fecha de inicio'])}}
                         </div>
                         <div>
-                            <select name="cancha">
-                                <option disabled selected>Cancha</option>
-                                <option>opcion</option>
-                            </select>
+                        {{Form::text('cancha' , null , ['placeholder' => 'Tipo de cancha'])}}
                         </div>
                     </div>
                 </div>
@@ -134,10 +127,14 @@
             <h2 class="text-center">Equipos</h2>
             <div>
                 <h3><span>Mínimo</span> de equipos</h3>
-                <div><input type="number" min="2" name="minimo"></div>
+                <div>
+                {{Form::text('min_equipos')}}
+                </div>
                 <p class="mensaje-min">Se requiere un minimo obligatorio de equipos para la creación de un torneo.</p>
                 <h3><span>Máximo</span> de equipos</h3>
-                <div><input type="number" min="2" name="maximo"></div>
+                <div>
+                {{Form::text('max_equipos')}}
+                </div>
             </div>
             <div>
                 <div class="row con_agregar">
@@ -148,8 +145,13 @@
                     <a href="">Guardar</a>
                     </div>
                 </div>
-                    <div><input type="search" placeholder="Nombre de equipo"></div>
-                    <div><input type="text" placeholder="Representante"></div>
+                    <div>
+                    {{Form::text('nombre_equipo[]' , null , ['placeholder' => 'Nombre de equipo'])}}
+                    </div>
+                    <div>
+                    {{Form::text('representantes_email[]' , null , ['placeholder' => 'Email de representante'])}}
+                    {{Form::text('representantes_id[]')}}
+                    </div>
                 <div class="row con_agregar">
                     <div class="col-md-6">
                         <h3><span>jugadores</span></h3>
@@ -159,6 +161,64 @@
                     </div>
                 </div>
                 <p class="mensaje-min">Podés agregar jugadores a este equipo o dejarle esta tarea al representante</p>
+                    <div>
+                        {{Form::text('jugador_nombre_equipo0[]' , null , ['placeholder' => 'Nombre'])}}
+                        {{Form::text('jugador_apellido_equipo0[]' , null , ['placeholder' => 'Apellido'])}}
+                    </div>
+                    <div>
+                        {{Form::text('jugador_nombre_equipo0[]' , null , ['placeholder' => 'Nombre'])}}
+                        {{Form::text('jugador_apellido_equipo0[]' , null , ['placeholder' => 'Apellido'])}}
+                    </div>
+                    <div>
+                        {{Form::text('jugador_nombre_equipo0[]' , null , ['placeholder' => 'Nombre'])}}
+                        {{Form::text('jugador_apellido_equipo0[]' , null , ['placeholder' => 'Apellido'])}}
+                    </div>
+                    <div>
+                        {{Form::text('jugador_nombre_equipo0[]' , null , ['placeholder' => 'Nombre'])}}
+                        {{Form::text('jugador_apellido_equipo0[]' , null , ['placeholder' => 'Apellido'])}}
+                    </div>
+            </div>
+            <div>
+                <div class="row con_agregar">
+                    <div class="col-md-6">
+                        <h3><span>Equipos</span></h3>
+                    </div>
+                    <div class="col-md-6">
+                    <a href="">Guardar</a>
+                    </div>
+                </div>
+                    <div>
+                    {{Form::text('nombre_equipo[]' , null , ['placeholder' => 'Nombre de equipo'])}}
+                    </div>
+                    <div>
+                    {{Form::text('representantes_email[]' , null , ['placeholder' => 'Email de representante'])}}
+                    {{Form::text('representantes_id[]')}}
+                    </div>
+                <div class="row con_agregar">
+                    <div class="col-md-6">
+                        <h3><span>jugadores</span></h3>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" data-toggle="modal" data-target="#myModal">Agregar</button>
+                    </div>
+                </div>
+                <p class="mensaje-min">Podés agregar jugadores a este equipo o dejarle esta tarea al representante</p>
+                    <div>
+                        {{Form::text('jugador_nombre_equipo1[]' , null , ['placeholder' => 'Nombre'])}}
+                        {{Form::text('jugador_apellido_equipo1[]' , null , ['placeholder' => 'Apellido'])}}
+                    </div>
+                    <div>
+                        {{Form::text('jugador_nombre_equipo1[]' , null , ['placeholder' => 'Nombre'])}}
+                        {{Form::text('jugador_apellido_equipo1[]' , null , ['placeholder' => 'Apellido'])}}
+                    </div>
+                    <div>
+                        {{Form::text('jugador_nombre_equipo1[]' , null , ['placeholder' => 'Nombre'])}}
+                        {{Form::text('jugador_apellido_equipo1[]' , null , ['placeholder' => 'Apellido'])}}
+                    </div>
+                    <div>
+                        {{Form::text('jugador_nombre_equipo1[]' , null , ['placeholder' => 'Nombre'])}}
+                        {{Form::text('jugador_apellido_equipo1[]' , null , ['placeholder' => 'Apellido'])}}
+                    </div>
             </div>
         </section>
             <section id="paso-cuatro" class="container">
@@ -209,7 +269,10 @@
                     <div class="col-md-4"><a href="#" id="anterior_btn">Anterior</a></div>
                     <div class="col-md-4"><a href="#">Ayuda</a> - información adicional</div>
                     <div class="col-md-4"><a href="#" id="siguiente_btn">Siguiente</a></div>
-                    <div class="col-md-4"><input id="confirmar_btn" type="submit" value="Confirmar"></div>
+                    <div class="col-md-4">
+                    {{Form::submit('Confirmar' ,['id' => 'confirmar_btn'])}}
+                        <!--<input id="confirmar_btn" type="submit" value="Confirmar">-->
+                    </div>
                 </div>
             </div>
         </form>

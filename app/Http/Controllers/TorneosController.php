@@ -27,11 +27,16 @@ class TorneosController extends Controller
     public function Add(Request $request)
     {
     	$user = Auth::User()->toArray();
-    	//guardo torneo
-    	
-        $id_torneo = Torneo::create([
-    		'nombre' => $request -> input('nombre') , 
-    		'lugar' => $request -> input('lugar') , 
+        $equiposParseados = CrearTorneo::parsearEquipos($request -> input());
+        //guardo torneo
+    	$id_torneo = Torneo::create([
+    		'nombre' => $request -> input('nombre') ,
+            'sexo' => $request -> input('sexo') , 
+            'precio_inscripcion' => $request -> input('precio_inscripcion') , 
+            'categoria' => $request -> input('categoria') , 
+    		'lugar' => $request -> input('lugar') ,
+            'fecha_inicio' => $request -> input('fecha_inicio') , 
+            'num_cancha' => $request -> input('cancha') ,  
     		'min_equipos' => $request -> input('min_equipos') , 
     		'max_equipos' => $request -> input('max_equipos')
     	]) -> id;
@@ -45,37 +50,12 @@ class TorneosController extends Controller
     		'torneos_id' => $id_torneo
     	]);
     	
+        $primerId = CrearTorneo::insertEquipos($equiposParseados);
+
+        //return $primerId;
         //guardo equipo
-    	
-        //parseo equipos a formato database
-    	$equiposDatabase = CrearTorneo::equiposToDatabase($request -> input() , $id_torneo);
-        Equipo::insert($equiposDatabase);
 
-
-/*
-        //guardo usuarios creados
-        $equipos = CrearTorneo::parse($request -> input() , $idEquipo);
-        $users = CrearTorneo::representantes($equipos);
-        foreach ($users as $key => $value) {
-            unset($users[$key]['equipos_id']);
-            
-        }
        
-        if(count($users) > 1){
-            $insertUsers = User::create($users[0]);
-            $idUser = $insertUsers -> id;
-            $restoUsers = array_splice($users, 1);
-            $restoUsers = User::insert($restoUsers);
-        }else{
-            $insertUsers = User::create($users);
-            $idUser = $insertUsers -> id;
-        }
-
-        return 'algo';
-        
-        //return dd(CrearTorneo::parse($request -> input() , $idEquipo));
-        //return dd(CrearTorneo::parse($request -> input()));
-        //return dd($request -> input());*/
 
     }
 }

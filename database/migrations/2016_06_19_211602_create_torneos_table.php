@@ -24,6 +24,10 @@ class CreateTorneosTable extends Migration
             $table->string('instagram' , 65)->nullable();
             $table->smallInteger('precio_inscripcion')->nullable();
             $table->smallInteger('precio_partido')->nullable();
+            $table->enum('sexo' , ['F' , 'M']);
+            $table->enum('categoria' , ['+18' , '+30' , 'libre' , 'sub-18']);
+            $table->date('fecha_inicio');
+            $table->tinyInteger('num_cancha'); 
             $table->tinyInteger('min_equipos');
             $table->tinyInteger('max_equipos');
             $table->softDeletes();    

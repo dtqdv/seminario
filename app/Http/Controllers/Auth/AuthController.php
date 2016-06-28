@@ -7,7 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-
+use Illuminate\Support\Facades\Input as Input;
 class AuthController extends Controller
 {
     /*
@@ -48,11 +48,21 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
+        $messages = [
+            'required' => 'El campo :attribute no puede estar vacio' , 
+            'max' => 'El campo :attribute no puede exceder el largo definido' , 
+            'email' => 'El campo :attribute debe ser de tipo email' , 
+            'unique' => 'Este :attribute ya existe' , 
+            'min' => 'El campo :attribute debe contener al menos 6 caracteres' , 
+            'confirmed' => 'Las contraseñas no coinciden'
+        ];
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'nombre' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
-        ]);
+            'apellido' => 'required|max:255'
+        ] , $messages);
+
     }
 
     /**
@@ -64,9 +74,30 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'nombre' => $data['nombre'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'apellido' => $data['apellido']
         ]);
+    }
+
+    public function loginDtqdv()
+    {
+        $data = Input::except('_token');
+        //return dd($data);
+        $messages = [
+            'required' => 'El campo :attribute no puede estar vacio' , 
+            'email' => 'El campo :attribute debe ser de tipo email' , 
+        ];
+        $validator = Validator::make($data, [
+            'password' => 'required',
+            'email' => 'required|email',
+        ] , $messages);
+
+        if (\Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
+            return redirect()->intended('/');
+        }else{
+            return redirect()->intended('/login')->withErrors($validator)->withInput();
+        }       
     }
 }

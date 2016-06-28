@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'FranklinGothic-Demi';
+    url('FranklinGothic-Demi.ttf')  format('truetype'),
+}
+
+@font-face{
+    font-family: "Roboto";
+    src: url("Roboto-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Roboto Thin";
+    src: url("Roboto-Thin.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Roboto Light";
+    src: url("Roboto-Light.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Bebas Neue Thin";
+    src: url("BebasNeue Thin.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Bebas Neue";
+    src: url("BebasNeue Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Bebas Neue Light";
+    src: url("BebasNeue Light.ttf") format("truetype");
+}
+

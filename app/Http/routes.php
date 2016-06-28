@@ -10,16 +10,20 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+/*Route::get('/logout' , function(){
+	Auth::logout();
+});*/
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('sections.home');
 });
 
-Route::auth();
 
+Route::auth();
+Route::post('/login' , 'Auth\AuthController@loginDtqdv');
 Route::get('/home', 'HomeController@index');
 
-Route::get('crear-torneo' , [
+/*Route::get('crear-torneo' , [
 	'middleware' => ['auth' , 'organizador'] ,
 	'uses' => 'TorneosController@ViewCreate'
 ]);
@@ -27,5 +31,5 @@ Route::get('crear-torneo' , [
 Route::post('crear-torneo/create' , [
 	'middleware' => ['auth' , 'organizador'] , 
 	'uses' => 'TorneosController@Add'
-]);
+]);*/
 

@@ -4,7 +4,7 @@ namespace App\Dtqdv;
 /**
 * 
 */
-class Equipos_Input
+class CrearTorneo
 {
 	
 	private function __construct()
@@ -19,7 +19,7 @@ class Equipos_Input
 		foreach ($data['equipo_nombre'] as $keyEquipo => $valueEquipo) {
 			
 			//creo array modelo para retornar con nombre de equipo , jugadores y representante 
-			$equipos[$keyEquipo] = ['nombre' => null , 'jugadores' => [] , 'representante' => null , 'id' => null];
+			$equipos[$keyEquipo] = ['nombre' => null , 'jugadores' => [] , 'representante_id' => null , 'id' => null , 'representante_email'];
 			//le pongo el nombre de equipo 
 			$equipos[$keyEquipo] = ['nombre' => $valueEquipo];
 			//saco el array correspondiente a la iteracion actual para los jugadores
@@ -34,9 +34,11 @@ class Equipos_Input
 				$equipos[$keyEquipo]['jugadores'][$keyJugador] = $valueJugador;
 			}
 			//saco el array correspondiente a la iteracion actual para los representantes
-			$indexRepresentante = 'equipo'.$keyEquipo.'_representante';
+			$id_representante = 'equipo'.$keyEquipo.'_representante_id';
+			$email_representante = 'equipo'.$keyEquipo.'_representante_email';
 			//pongo el representante correspondiente a este equipo
-			$equipos[$keyEquipo]['representante'] = $data[$indexRepresentante][0];
+			$equipos[$keyEquipo]['representante_id'] = $data[$id_representante];
+			$equipos[$keyEquipo]['email_representante'] = $data[$email_representante];
 			$c++;
 		}
 
@@ -51,18 +53,37 @@ class Equipos_Input
 			if($id != null){
 				$equipostoreturn[] = [
 					'nombre' => $value['nombre'] , 
-					'torneos_id' => $id /*, 
-					'updated_at'=> date('Y-m-d H:i:s')*/
+					'torneos_id' => $id , 
+					'updated_at'=> date('Y-m-d H:i:s') , 
+					'created_at' => date('Y-m-d H:i:s')
 				];				
 			}else{
 			$equipostoreturn[] = [
 				'nombre' => $value['nombre'] , 
-				 /*, 
-				'updated_at'=> date('Y-m-d H:i:s')*/
+				'updated_at'=> date('Y-m-d H:i:s') , 
+				'created_at' => date('Y-m-d H:i:s')
 			];				
 			}
 
 		}
 		return $equipostoreturn;
+	}
+
+	static public function representantes($equipos)
+	{
+		$users = [];
+		foreach ($equipos as $key => $value) {
+			$users[] = [
+				'email' => $value['email_representante'] ,
+				'password' => bcrypt('1234') ,
+				'nombre' => 'algo' ,
+				'apellido' => 'algo' ,
+				'sexo' => 'F' , 
+				'dni' => 231231 , 
+				'equipos_id' => $value['id'] 
+			];
+		}
+
+		return $users;
 	}
 }

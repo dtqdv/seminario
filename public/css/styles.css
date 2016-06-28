@@ -1,0 +1,164 @@
+body{
+	font-size:1rem;
+	font-family: 'Open Sans', sans-serif;
+}
+
+
+form{
+	background: #ffffff;
+	border-radius:4px;
+	box-shadow:4px 4px 10px 1px #547355;
+	padding:30px 0px;
+}
+
+form h1{
+	padding-top:15px;
+	padding-bottom: 0;
+	padding-left: 0;
+	padding-right: 0;
+	margin:0; 
+	font-weight: lighter;
+	font-size: 2.5em;
+
+}
+
+.text-center{
+	text-align: center;
+}
+
+.block{
+	display: block;
+}
+
+.input-default{
+	padding-left:20px;
+	padding-top:5px;
+	padding-bottom: 5px;
+	background: #f9f9f9;
+	font-size:1.7em;
+	border-radius:4px;
+	width:100%;
+	display: inline-block;
+	border: solid 2px transparent;
+	font-weight: lighter;
+}
+
+.input-description{
+	font-size: 1.35em;
+	padding:10px 0px;
+	padding-left: 10px;
+}
+
+.input-default:focus{
+	box-shadow: none;
+	border: solid 2px #fec107;
+	outline: none;
+	background: white;
+}
+.container-input{
+	padding-top:15px;
+	padding-bottom: 15px;
+}
+
+.btn-send{
+	text-transform: uppercase;
+	background:#fec107;
+	text-align: center;
+	padding-top:15px;
+	padding-bottom: 15px;
+	padding-left:10px;
+	font-size:1.8em;
+	border:none;
+	border-radius: 4px;
+	box-shadow:4px 4px 10px 1px #cecece;
+	width:100%;
+	color:#fff;
+}
+
+.btn-send:focus{
+	outline: none;
+}
+
+.btn-send:hover{
+	color: black;
+}
+
+.footer-form{
+	color:white;
+	font-size:1.6em;
+	font-weight: lighter;
+}
+
+.footer-form:last-child{
+	margin-bottom: 40px;
+}
+
+.footer-form strong{
+	font-weight:600;
+}
+
+.row-form a{
+	font-size: 1.6em;
+	color:black;
+	font-weight: lighter;
+	display: inline-block;
+}
+
+.row-form{
+	margin-bottom:40px;
+}
+
+.solapa-rol{
+	background: #f6f2f3;
+	color:#17861a;
+	width:110px;
+	height:110px;
+	display: inline-block;
+	box-shadow:4px 4px 10px 1px #547355;
+	border-radius:0px 0px 10px 0px;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
+	position: relative;
+	top:-55px;
+
+}
+
+.solapa-rol span{
+	font-size: 4em;
+	line-height:152px;
+	-webkit-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	position: absolute;
+	text-shadow:1px 1px  1px #202821;
+}
+
+.row-solapa{
+	margin-bottom:40px;
+	text-align: center;
+}
+figure{
+	margin:0;
+	padding:30px 0px;
+}
+
+.wrapper-message{
+
+	font-size:2.3em;
+	font-weight: lighter;
+}
+
+.form-footer-log a{
+	color:white;
+}
+
+.form-footer-log a:hover{
+	color:white;
+}
+
+.bold{
+	font-weight: bold;
+}

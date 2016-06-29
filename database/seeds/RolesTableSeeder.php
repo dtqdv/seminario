@@ -11,7 +11,7 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-    	$roles = ['Administrador' , 'Organizador' , 'Jugador' , 'Personalizado'];
+    	$roles = ['Administrador' , 'Organizador' , 'Representante' , 'Personalizado' , 'jugador' , 'anonimo'];
     	foreach ($roles as $key => $value) {
     		Rol::create(['valor' => $value]);
     	}

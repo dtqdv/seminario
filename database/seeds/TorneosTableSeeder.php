@@ -23,7 +23,11 @@ class TorneosTableSeeder extends Seeder
         		'precio_inscripcion' => $faker -> numberBetween($min = 400, $max = 1000) ,
         		'precio_partido' => $faker -> numberBetween($min = 100, $max = 300) ,
         		'min_equipos' => $faker -> numberBetween($min = 10, $max = 20) ,
-        		'max_equipos' => $faker -> numberBetween($min = 25, $max = 40) 
+        		'max_equipos' => $faker -> numberBetween($min = 25, $max = 40) ,
+                'sexo' => $faker -> randomElement(['F' , 'M']) ,
+                'categoria' => $faker -> randomElement(['+18' , '+30' , 'sub-18' , 'libre']) ,
+                'fecha_inicio' => $faker -> date ,
+                'num_cancha' =>  $faker -> numberBetween([5 , 7 , 11 , 9])
         	]);
         }
     }

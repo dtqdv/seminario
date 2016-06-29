@@ -15,7 +15,7 @@ class Roles_PersonasTableSeeder extends Seeder
         $faker = Faker::create();
         for($i = 0;$i < 20; $i++){
             App\Rol_persona::create([
-                'roles_id' => $faker -> numberBetween($min = 1, $max = 4),
+                'roles_id' => $faker -> numberBetween($min = 1, $max = 6),
                 'users_id' => $faker -> numberBetween($min = 1, $max = 20)
             ]);
         }

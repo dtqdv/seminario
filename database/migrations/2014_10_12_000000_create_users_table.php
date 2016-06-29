@@ -17,11 +17,11 @@ class CreateUsersTable extends Migration
             $table->string('nombre' , 40);
             $table->string('apellido' , 40);
             $table->string('email' , 70)->nullable()->unique();
-            $table->string('password' , 60);
+            $table->string('password' , 60)->nullable();
             $table->text('descripcion')->nullable();
             $table->enum('sexo' , ['F' , 'M']);
-            $table->integer('dni');
-            $table->enum('estado' , ['suspendido' , 'baneado' , 'activo']);
+            $table->integer('dni')->nullable();
+            $table->enum('estado' , ['suspendido' , 'baneado' , 'activo' , 'no-activado'])->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

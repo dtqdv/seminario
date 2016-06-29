@@ -86,6 +86,11 @@
             <div>
                 {{Form::text('nombre' , null , ['placeholder' => 'Nombre de torneo'])}}
             </div>
+                        @if($errors->has('nombre'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('nombre') }}</strong>
+                        </span>
+                        @endif
         </section>
         <section id="paso-dos" class="container">
             <div class="text-center"><img src="img/pasonum-2.png" alt="Paso 2"></div>
@@ -100,25 +105,55 @@
                                 {{Form::radio('sexo' , 'M' , null , ['id' => 'masculino'])}}
                                 <label for="masculino"><span class="radio empujar_izquierda"></span>Masculino</label>
                             </div>
+                        @if($errors->has('sexo'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('sexo') }}</strong>
+                        </span>
+                        @endif
                         </div>
                         <div>
                         {{Form::text('precio_inscripcion' , null , ['placeholder' => 'Precio de inscripcion'])}}
+                        @if($errors->has('precio_inscripcion'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('precio_inscripcion') }}</strong>
+                        </span>
+                        @endif
                         </div>
                         <div>
                         {{Form::select('categoria', array('+18' => '+18', '+30' => '+30' , 'libre' => 'value' , 'sub-18' => 'sub-18'))}}
                         </div>
+                        @if($errors->has('categoria'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('categoria') }}</strong>
+                        </span>
+                        @endif
                         <div>
                         {{Form::text('lugar' , null , ['placeholder' => 'Direccion'])}}
                         </div>
+                        @if($errors->has('lugar'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('lugar') }}</strong>
+                        </span>
+                        @endif
                     </div>
                     <div class="col-md-6">
                         <h3><span>Fecha</span> de inicio</h3>
                         <div>
                             {{Form::text('fecha_inicio' , null , ['placeholder' => 'Fecha de inicio'])}}
                         </div>
+                        @if($errors->has('fecha_inicio'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('fecha_inicio') }}</strong>
+                        </span>
+                        @endif
                         <div>
                         {{Form::text('cancha' , null , ['placeholder' => 'Tipo de cancha'])}}
                         </div>
+                        @if($errors->has('cancha'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('cancha') }}</strong>
+                        </span>
+                        @endif
                     </div>
                 </div>
         </section>
@@ -130,10 +165,20 @@
                 <div>
                 {{Form::text('min_equipos')}}
                 </div>
+                        @if($errors->has('min_equipos'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('min_equipos') }}</strong>
+                        </span>
+                        @endif
                 <p class="mensaje-min">Se requiere un minimo obligatorio de equipos para la creación de un torneo.</p>
                 <h3><span>Máximo</span> de equipos</h3>
                 <div>
                 {{Form::text('max_equipos')}}
+                        @if($errors->has('max_equipos'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('max_equipos') }}</strong>
+                        </span>
+                        @endif
                 </div>
             </div>
             <div>
@@ -150,7 +195,6 @@
                     </div>
                     <div>
                     {{Form::text('representantes_email[]' , null , ['placeholder' => 'Email de representante'])}}
-                    {{Form::text('representantes_id[]')}}
                     </div>
                 <div class="row con_agregar">
                     <div class="col-md-6">
@@ -192,7 +236,6 @@
                     </div>
                     <div>
                     {{Form::text('representantes_email[]' , null , ['placeholder' => 'Email de representante'])}}
-                    {{Form::text('representantes_id[]')}}
                     </div>
                 <div class="row con_agregar">
                     <div class="col-md-6">

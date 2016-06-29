@@ -14,5 +14,9 @@ class Torneo extends Model
     {
         return $this -> belongsToMany('App\User' , 'personas_torneos' , 'torneos_id' , 'users_id');
     }
+    public function equipos()
+    {
+    	return $this -> hasMany('App\Equipo' , 'torneos_id' , 'id');
+    }
 
 }

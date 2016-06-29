@@ -34,9 +34,5 @@ class User extends Authenticatable
     {
         return $this -> belongsToMany('App\Equipo' , 'integrantes_equipos' , 'users_id' , 'equipos_id');
     }
-    public function torneo()
-    {
-        return $this -> belongsToMany('App\Torneo' , 'personas_torneos' , 'users_id' , 'torneos_id');
-    }
 
 }

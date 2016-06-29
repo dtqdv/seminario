@@ -16,7 +16,6 @@ class CrearTorneo
 	{
 		$equiposData = [
 			'nombre' => null , 
-			'representante_id' => null ,
 			'representante_email' => null , 
 			'jugadores' => []
 		];
@@ -25,7 +24,6 @@ class CrearTorneo
 
 			$equiposData['nombre'] = $equipo;
 			$equiposData['representante_email'] = $data['representantes_email'][$idxEquipo];
-			$equiposData['representante_id'] = $data['representantes_id'][$idxEquipo];
 			$arrayNombreJugadores = 'jugador_nombre_equipo'.$idxEquipo;
 			$arrayApellidoJugadores = 'jugador_apellido_equipo'.$idxEquipo;
 
@@ -40,32 +38,7 @@ class CrearTorneo
 		return $equipos;
 	}
 
-	static private function generateInsert($data , $idTorneo)
-	{
-		$length = count($data);
-		$insert = [];
-		for ($i=1; $i < $length; $i++) { 
-			$insert = [
-				'torneos_id' => $idTorneo , 
-				'nombre' => $data[$i]['nombre']
-			];
-		}
-		Equipo::insert($insert);
-	}
-
-	static public function insertEquipos($equiposParseados , $idTorneo)
-	{	
-		$length = count($equiposParseados);
-		if($equiposParseados > 1){
-			$idEquipo = Equipo::create([
-				'torneos_id' => $idTorneo , 
-				'nombre' => $equiposParseados[0]['nombre'] 
-			]);
-			Self::generateInsert($equiposParseados , $idTorneo);
-
-			return $idEquipo;
-		}
-	}	
+	
 
 
 }

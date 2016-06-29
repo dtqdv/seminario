@@ -14,14 +14,18 @@ class Equipo extends Model
     	return $this -> hasMany('App\Color_equipo' , 'equipos_id' , 'id');
     }
     
-    public function equipo()
+    /*public function equipo()
     {
     	return $this -> belongsToMany();
-    }
-
+    }*/
     public function integrantes()
     {
         return $this -> belongsToMany('App\User' , 'integrantes_equipos' , 'equipos_id' , 'users_id');
+    }
+
+    public function torneo()
+    {
+        return $this -> belongsTo('App\Torneo' , 'equipos_id' , 'id');
     }
 
 

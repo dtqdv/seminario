@@ -1,6 +1,5 @@
 <?php 
 namespace App\Dtqdv;
-use App\Equipo as Equipo;
 /**
 * 
 */
@@ -10,6 +9,17 @@ class CrearTorneo
 	private function __construct()
 	{
 		# code...
+	}
+
+	public static function pushValidationRulesTeams($rules , $rulesTeams)
+	{
+		foreach ($rulesTeams as $key => $value) {
+			foreach ($value as $idx => $rule) {
+				$rules[$idx] = $rule;
+			}
+		}
+
+		return $rules;
 	}
 
 	public static function generateValidationRulesTeams($input)

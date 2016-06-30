@@ -12,7 +12,7 @@ class CrearTorneo
 		# code...
 	}
 
-	public static function parsearEquipos($data)
+	static public function parsearEquipos($data)
 	{
 		$equiposData = [
 			'nombre' => null , 

@@ -18,18 +18,53 @@ Route::get('/', function () {
     return view('sections.home');
 });
 
-
 Route::auth();
-Route::post('/login' , 'Auth\AuthController@loginDtqdv');
-Route::get('/home', 'HomeController@index');
+
+Route::post('/login' , [
+	'as' => 'login' , 
+	'uses' => 'Auth\AuthController@loginDtqdv'
+]);
+
+Route::get('/home', [
+	'uses' => 'HomeController@index' ,
+	'as' => 'home'
+]);
+
+Route::get('/login' , [
+	'as' => 'login' ,
+	'uses' => function()
+	{
+		return view('auth.login');
+	}
+]);
+
+Route::get('/register' , [
+	'as' => 'registro' ,
+	'uses' => function()
+	{
+		return view('auth.register');
+	}
+]);
+
+Route::get('/logout' , [
+	'as' => 'logout' , 
+	'uses' => 'Auth\AuthController@logoutDtqdv'
+]);
 
 Route::get('crear-torneo' , [
 	'middleware' => ['auth' , 'organizador'] ,
-	'uses' => 'TorneosController@ViewCreate'
+	'uses' => 'TorneosController@ViewCreate' ,
+	'as' => 'crear-torneo'
 ]);
 
 Route::post('crear-torneo' , [
 	'middleware' => ['auth' , 'organizador'] , 
 	'uses' => 'TorneosController@Add'
+]);
+
+Route::get('torneos' , [
+	'middleware' => ['auth' , 'organizador'] , 
+	'as' => 'torneos' ,
+	'uses' => 'TorneosController@showAll'
 ]);
 

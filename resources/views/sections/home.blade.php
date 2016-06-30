@@ -9,12 +9,24 @@
     <div class="container">
         <nav>
             <ul class="row margen-abajo">
-                <li class="col-md-2"><a href="#">Inicio</a></li>
-                <li class="col-md-2"><a href="#">Torneo</a></li>
-                <li class="col-md-2"><a href="#">Contacto</a></li>
-                <li class="col-md-2"><a href="#">Log in</a></li>
-                <li class="col-md-2"><a href="#" class="recuadro">Registro</a></li>
-                <li class="col-md-2"><a href="#"><img src="img/buscar.png" alt="Buscar"></a></li>
+                <li class="col-md-2">
+                {{link_to_route('home' , 'Inicio')}}
+                </li>
+                <li class="col-md-2">
+                    <a href="#">Torneos</a>
+                </li>
+                <li class="col-md-2">
+                    <a href="#">Contacto</a>
+                </li>
+                <li class="col-md-2">
+                    {{link_to_route('login' , 'Login')}}
+                </li>
+                <li class="col-md-2">
+                    {{link_to_route('registro' , 'Registro')}}
+                </li>
+                <li class="col-md-2">
+                    <a href="#"><img src="img/buscar.png" alt="Buscar"></a>
+                </li>
             </ul>
         </nav>
     </div>

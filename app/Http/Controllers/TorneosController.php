@@ -22,6 +22,12 @@ class TorneosController extends Controller
     	return view('sections.crear_torneo' , compact('user' , 'section'));
     	
     }
+    public function showAll()
+    {
+        $user = Auth::User()->toArray();
+        $section = 'Tus torneos';
+        return view('sections.torneos-user' , compact('user' , 'section'));
+    }
 
     public function Add(Request $request)
     {

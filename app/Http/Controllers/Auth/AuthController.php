@@ -28,7 +28,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/torneos';
 
     /**
      * Create a new authentication controller instance.
@@ -99,5 +99,11 @@ class AuthController extends Controller
         }else{
             return redirect()->intended('/login')->withErrors($validator)->withInput();
         }       
+    }
+
+    public function logoutDtqdv()
+    {
+        \Auth::logout();
+        return redirect('/');
     }
 }

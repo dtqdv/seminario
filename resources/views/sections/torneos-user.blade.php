@@ -1,41 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 @section('css')
 {{Html::style('css/torneos-user.css')}}
 @endsection
 @section('content')
-<header>
-    <nav id="botonera">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">De taquito</a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Torneos</a></li>
-                    <li><a href="#">Contacto</a></li>
-                    <li><a href="#">Prode</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-search buscar"></span></a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle user-btn" data-toggle="dropdown" href="#">{{$user['nombre']}} <span class="glyphicon glyphicon-chevron-down"></span></a>
-                        <ul class="dropdown-menu">
-                            <!--<li><a href="#">Contenido</a></li>-->
-                            <li>{{link_to_route('torneos', 'Ver mis torneos' ,[], [])}}</li>
-                            <li>{{link_to_route('logout' , 'logout' , [] , [])}}</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="portada-editar roboto"><h1 class="roboto">Panel de Control</h1></div>
-</header>
-<main>
+
     <div id="form-editar" class="container-fluid">
         <div class="container">
             <h2 class="roboto">Mis torneos</h2>

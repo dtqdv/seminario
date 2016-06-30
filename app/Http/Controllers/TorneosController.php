@@ -32,7 +32,6 @@ class TorneosController extends Controller
     public function Add(Request $request)
     {
     	$user = Auth::User()->toArray();
-        $equiposParseados = CrearTorneo::parsearEquipos($request -> input());
         
         $dataTorneo= [
             'nombre' => $request -> input('nombre') ,
@@ -66,13 +65,15 @@ class TorneosController extends Controller
             'max_equipos' => 'required|numeric' 
         ];
 
-
-        $validator = Validator::make($dataTorneo , $reglas , $messages);
-
-        if($validator -> fails())
+        $rulesTeams = CrearTorneo::generateValidationRulesTeams($request -> input());
+        
+        //$validator = Validator::make($dataTorneo , $reglas , $messages);
+        
+        return dd($rulesTeams);
+        /*if($validator -> fails())
         {
-           return redirect('/crear-torneo')->withErrors($validator);
-        }
+           return redirect('/crear-torneo')->withInput($request -> input());
+        }*/
         /*$id_torneo = Torneo::create([
             'nombre' => $request -> input('nombre') ,
             'sexo' => $request -> input('sexo') , 

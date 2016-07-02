@@ -31,8 +31,11 @@ class TorneosController extends Controller
 
     public function Add(Request $request)
     {
+        //obtengo el usuario
     	$user = Auth::User()->toArray();
-        
+        //obtengo el usuario
+
+        //defino las reglas de validacion estaticas , todos los mensajes de error y los datos estaticos que llegan
         $dataTorneo= [
             'nombre' => $request -> input('nombre') ,
             'precio_inscripcion' => $request -> input('precio_inscripcion') ,
@@ -64,26 +67,27 @@ class TorneosController extends Controller
             'min_equipos' => 'required|numeric' ,
             'max_equipos' => 'required|numeric' 
         ];
+        //defino las reglas de validacion estaticas , todos los mensajes de error y los datos estaticos que llegan
 
-        $rulesTeams = CrearTorneo::generateValidationRulesTeams($request -> input());
-        $reglas = CrearTorneo::pushValidationRulesTeams($reglas , $rulesTeams);
-        $dataTorneo = CrearTorneo::generateDataValidator($dataTorneo , $request -> input());
-        $equipos = CrearTorneo::generateCountEquiposJugadores($request -> input());
-        
-        $validator = Validator::make($dataTorneo , $reglas , $messages);
-        echo '<pre>';
-            print_r($dataTorneo);
-        echo '</pre>';
+        //proceso todas las reglas y datos dinamicos        
+        $reglas = CrearTorneo::generarValidaciones($reglas , $request -> input());
+        $dataTorneo = CrearTorneo::generarDataValidaciones($dataTorneo , $request -> input());
+        $equipos = CrearTorneo::contarEquipos($request -> input());
+        //proceso todas las reglas y datos dinamicos        
 
-        echo '<pre>';
-            print_r($reglas);
-        echo '</pre>';
-        
-        
-        if($validator -> fails())
+        //ejecuto el validador
+        //$validator = Validator::make($dataTorneo , $reglas , $messages);
+        //ejecuto el validador
+       
+        return dd(CrearTorneo::parse($request -> input()));
+        //evaluo si los datos no son validos
+        /*if($validator -> fails())
         {
            return redirect('/crear-torneo')->withInput($request -> input())->with('equipos' , $equipos)->withErrors($validator);
-        }
+        }*/
+        //evaluo si los datos no son validos
+        
+        //creo el torneo
         /*$id_torneo = Torneo::create([
             'nombre' => $request -> input('nombre') ,
             'sexo' => $request -> input('sexo') , 
@@ -95,18 +99,17 @@ class TorneosController extends Controller
             'min_equipos' => $request -> input('min_equipos') , 
             'max_equipos' => $request -> input('max_equipos')
         ]) -> id;
+        //creo el torneo
 
-        //guardo torneo
         
         //guardo a que persona le pertenece el torneo
-        
         Personas_torneos::create([
             'users_id' => $user['id'] , 
             'torneos_id' => $id_torneo
         ]);
+        //guardo a que persona le pertenece el torneo
         
-        //guardo todos los equipos con sus representantes-jugador , roles de usuarios y integrantes de equipo
-        
+                
         foreach ($equiposParseados as $key => $value) {
             //guardo equipo y recupero id
             $id_equipo = Equipo::create([

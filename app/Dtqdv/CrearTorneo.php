@@ -11,7 +11,7 @@ class CrearTorneo
 		# code...
 	}
 
-	public static function pushValidationRulesTeams($rules , $rulesTeams)
+	static private function pushValidationRulesTeams($rules , $rulesTeams)
 	{
 		foreach ($rulesTeams as $key => $value) {
 			foreach ($value as $idx => $rule) {
@@ -22,7 +22,7 @@ class CrearTorneo
 		return $rules;
 	}
 
-	public static function generateValidationRulesTeams($input)
+	static public function generarValidaciones($rulesDefault , $input)
 	{
 		$counterTeams = 0;
 		$statusTeams = true;
@@ -52,11 +52,11 @@ class CrearTorneo
 				$statusTeams = false;
 			}
 		}
-		return $rules;
+		return Self::pushValidationRulesTeams($rulesDefault , $rules);
 
 	}
 
-	public static function generateDataValidator($dataDefault , $input)
+	static public function generarDataValidaciones($dataDefault , $input)
 	{
 		$counterTeams = 0;
 		$statusTeams = true;
@@ -91,7 +91,7 @@ class CrearTorneo
 		return $dataNew;			
 	}
 
-	public static function generateCountEquiposJugadores($input)
+	static public function contarEquipos($input)
 	{
 		$equipos = [];
 		$counterTeams = 0;
@@ -119,6 +119,36 @@ class CrearTorneo
 			}
 		}
 		return $equipos;
+	}
+
+	static public function parse($input)
+	{
+		$statusTeams = true;
+		$counterTeams = 0;
+		$keyRepresentante = 'representantes_email_equipo_';
+		$keyTeams = 'nombre_equipo_';
+		$teams = [];
+		while ($statusTeams == true) {
+			if(array_key_exists($keyTeams.$counterTeams, $input) && array_key_exists($keyRepresentante.$counterTeams, $input)){
+				$teams[$counterTeams]['nombre'] = $input[$keyTeams.$counterTeams];
+				$teams[$counterTeams]['representante_email'] = $input[$keyRepresentante.$counterTeams];
+				$counterJugadores = 0;
+				$statusPlayers = true;
+				while($statusPlayers == true){
+					if(array_key_exists('jugador_'.$counterJugadores.'_nombre_equipo_'.$counterTeams, $input) && array_key_exists('jugador_'.$counterJugadores.'_apellido_equipo_'.$counterTeams, $input)){
+						$teams[$counterTeams]['jugadores'][$counterJugadores]['nombre'] = $input['jugador_'.$counterJugadores.'_nombre_equipo_'.$counterTeams];
+						$teams[$counterTeams]['jugadores'][$counterJugadores]['apellido'] = $input['jugador_'.$counterJugadores.'_apellido_equipo_'.$counterTeams];
+						$counterJugadores = $counterJugadores + 1;	
+					}else{
+						$statusPlayers = false;
+					}
+				}
+				$counterTeams = $counterTeams + 1;
+			}else{
+				$statusTeams = false;
+			}
+		}
+		return $teams;
 	}
 
 }

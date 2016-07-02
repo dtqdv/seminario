@@ -115,6 +115,9 @@
                         @endif
                 </div>
             </div>
+           
+
+           
             <div>
                 <div class="row con_agregar">
                     <div class="col-md-6">
@@ -124,6 +127,41 @@
                     <a href="" id='agregar-equipo'>Agregar Equipo</a>
                     </div>
                 </div>
+                <!-- -->
+                @if (Session::has('equipos'))
+                {{--*/ $cantidad = Session::get('equipos') /*--}}
+                
+                @for($i = 0;$i < count($cantidad);$i++)
+                <div class='wrapper-equipos'>
+                    <div>
+                    {{Form::text('nombre_equipo_'.$i , null , ['placeholder' => 'Nombre de equipo'])}}
+                    </div>
+                    <div>
+                    {{Form::text('representantes_email_equipo_'.$i , null , ['placeholder' => 'Email de representante'])}}
+                    </div>
+                <div class="row con_agregar">
+                    <div class="col-md-6">
+                        <h3><span>jugadores</span></h3>
+                    </div>
+                    <div class="col-md-6">
+                        <a class='agregar-jugador' href="">Agregar Jugador</a>
+                    </div>
+                </div>
+                <p class="mensaje-min">Podés agregar jugadores a este equipo o dejarle esta tarea al representante</p>
+                <div>
+                <div class='wrapper-jugador'>
+                    @for($c = 0;$c < ( $cantidad[$i]['jugadores'] + 1);$c++)
+                    
+                        {{Form::text('jugador_'.$c.'_nombre_equipo_'.$i , null , ['placeholder' => 'Nombre'])}}
+                        {{Form::text('jugador_'.$c.'_apellido_equipo_'.$i , null , ['placeholder' => 'Apellido'])}}
+                    
+                    @endfor
+                </div>                    
+                </div>
+                </div>                   
+                @endfor
+               
+                @else
                 <div class='wrapper-equipos'>
                     <div>
                     {{Form::text('nombre_equipo_0' , null , ['placeholder' => 'Nombre de equipo'])}}
@@ -145,7 +183,8 @@
                         {{Form::text('jugador_0_apellido_equipo_0' , null , ['placeholder' => 'Apellido'])}}
                     </div>
              
-                </div>
+                </div> 
+                @endif
             </div>
 
         </section>
@@ -249,7 +288,12 @@
     </div>
 </footer>
 <script>
+    @if(Session::has('equipos'))
+        var equipos = <?=json_encode(Session::get('equipos'))?>
+    @else
+    var equipos = [{jugadores : 0}];
+    @endif
 
-
+    console.log(equipos);
 </script>
 @endsection

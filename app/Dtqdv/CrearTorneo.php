@@ -35,7 +35,6 @@ class CrearTorneo
 				$statusPlayers = true;
 				$rules[$counterTeams][$nameTeam.$counterTeams] = 'required';
 				$rules[$counterTeams][$nameRepresentante.$counterTeams] = 'required';
-				
 				while ($statusPlayers == true) {
 					if(array_key_exists('jugador_'.$counterPlayers.'_nombre_equipo_'.$counterTeams , $input) && array_key_exists('jugador_'.$counterPlayers.'_apellido_equipo_'.$counterTeams , $input)){
 						$rules[$counterTeams]['jugador_'.$counterPlayers.'_nombre_equipo_'.$counterTeams] = 'required';
@@ -57,7 +56,34 @@ class CrearTorneo
 
 	}
 
-	
+	public static function generateCountEquiposJugadores($input)
+	{
+		$equipos = [];
+		$counterTeams = 0;
+		$statusTeams = true;
+		$nameTeam = 'nombre_equipo_';
+		while ($statusTeams == true) {
+			if(array_key_exists($nameTeam.$counterTeams, $input)){
+				$statusPlayers = true;
+				$countJugadores = 0;
 
+				while($statusPlayers == true){
+					if(array_key_exists('jugador_'.$countJugadores.'_nombre_equipo_'.$counterTeams, $input) && array_key_exists('jugador_'.$countJugadores.'_apellido_equipo_'.$counterTeams, $input)){
+
+						$countJugadores = $countJugadores + 1;
+					}else{
+						$countJugadores = $countJugadores - 1;
+						$equipos[$counterTeams]['jugadores'] = $countJugadores;
+						$statusPlayers = false;
+					}
+					
+				}
+				$counterTeams = $counterTeams + 1;
+			}else{
+				$statusTeams = false;
+			}
+		}
+		return $equipos;
+	}
 
 }

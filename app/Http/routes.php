@@ -68,3 +68,8 @@ Route::get('torneos' , [
 	'uses' => 'TorneosController@showAll'
 ]);
 
+Route::get('torneos/{id}' , [
+	'middleware' => 'auth' ,
+	'as' => 'torneo' ,
+	'uses' => 'TorneosController@showOne'
+]);

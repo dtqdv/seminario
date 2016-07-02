@@ -25,10 +25,17 @@ class TorneosController extends Controller
     public function showAll()
     {
         $user = Auth::User()->toArray();
+        $id = $user['id'];
         $section = 'Tus torneos';
-        return view('sections.torneos-user' , compact('user' , 'section'));
+        
+        $torneos = Personas_torneos::getTorneosFromUser($id);
+        
+        return view('sections.torneos-user' , compact('user' , 'section' , 'torneos'));
     }
-
+    public function showOne($id)
+    {   
+        return $id;
+    }
     public function Add(Request $request)
     {
         //obtengo el usuario

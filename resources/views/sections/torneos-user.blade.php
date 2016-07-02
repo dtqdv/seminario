@@ -7,6 +7,7 @@
     <div id="form-editar" class="container-fluid">
         <div class="container">
             <h2 class="roboto">Mis torneos</h2>
+            @if (isset($torneos) && $torneos != null)
             <table class="table table-fill roboto">
                 <thead >
                 <tr class="color-thead">
@@ -15,7 +16,19 @@
                 </tr>
                 </thead>
                 <tbody class="table-hover">
-                <tr>
+                @for ($i = 0;$i < count($torneos);$i++)
+                    <tr>
+                        <td class='text-left primer'>
+                            {{$torneos[$i]['nombre']}} <!--fijarme despues lo de la inyeccion de scripts-->
+                        </td>
+                        <td class='iconos text-left ultima'>
+                            {{link_to_route('torneo' , 'editar' , ['id' => $torneos[$i]['id']] , [])}}
+
+                            <!--<a href="#"><img class="editar" src="img/editar.png" alt="Editar"></a><a href="#"><img class="borrar" src="img/borrar.png" alt="Borrar"></a>-->
+                        </td>
+                    </tr>
+                @endfor
+                <!--<tr>
                     <td class="text-left primer">Supertazon Isotopos</td>
                     <td class="iconos text-left ultima"><a href="#"><img class="editar" src="img/editar.png" alt="Editar"></a><a href="#"><img class="borrar" src="img/borrar.png" alt="Borrar"></a></td>
                 </tr>
@@ -30,9 +43,12 @@
                 <tr>
                     <td class="text-left primer">Torneo de peques</td>
                     <td class="iconos text-left ultima"><a href="#"><img class="editar" src="img/editar.png" alt="Editar"></a><a href="#"><img class="borrar" src="img/borrar.png" alt="Borrar"></a></td>
-                </tr>
+                </tr>-->
                 </tbody>
             </table>
+            @else
+                <div>No creaste ningun torneo</div>
+            @endif
             {{link_to_route('crear-torneo' , 'Crear Torneo')}}
             <!--<input type="button" value="Crear Torneo" class="btn btn-block btn-torneo">-->
         </div>

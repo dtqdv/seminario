@@ -72,23 +72,28 @@ class TorneosController extends Controller
         //proceso todas las reglas y datos dinamicos        
         $reglas = CrearTorneo::generarValidaciones($reglas , $request -> input());
         $dataTorneo = CrearTorneo::generarDataValidaciones($dataTorneo , $request -> input());
-        $equipos = CrearTorneo::contarEquipos($request -> input());
+        $equiposCount = CrearTorneo::contarEquipos($request -> input());
+        
         //proceso todas las reglas y datos dinamicos        
 
         //ejecuto el validador
-        //$validator = Validator::make($dataTorneo , $reglas , $messages);
+        $validator = Validator::make($dataTorneo , $reglas , $messages);
         //ejecuto el validador
        
-        return dd(CrearTorneo::parse($request -> input()));
         //evaluo si los datos no son validos
         /*if($validator -> fails())
         {
-           return redirect('/crear-torneo')->withInput($request -> input())->with('equipos' , $equipos)->withErrors($validator);
+           return redirect('/crear-torneo')->withInput($request -> input())->with('equipos' , $equiposCount)->withErrors($validator);
         }*/
         //evaluo si los datos no son validos
         
+        //parseo equipos
+        $equipos = CrearTorneo::parse($request -> input());
+        //parseo equipos
+        \DB::beginTransaction();
         //creo el torneo
-        /*$id_torneo = Torneo::create([
+        try {
+        $id_torneo = Torneo::create([
             'nombre' => $request -> input('nombre') ,
             'sexo' => $request -> input('sexo') , 
             'precio_inscripcion' => $request -> input('precio_inscripcion') , 
@@ -110,7 +115,7 @@ class TorneosController extends Controller
         //guardo a que persona le pertenece el torneo
         
                 
-        foreach ($equiposParseados as $key => $value) {
+        foreach ($equipos as $key => $value) {
             //guardo equipo y recupero id
             $id_equipo = Equipo::create([
                 'nombre' => $value['nombre'] , 
@@ -136,10 +141,11 @@ class TorneosController extends Controller
                     'equipos_id' =>$id_equipo
                 ]);
                 //guardo el tipo de usuario jugador desactivado , lo tiene que activar el representante
+                $torneoName = str_replace(' ', '_', input('nombre'));
                 $idJugador = User::create([
                     'nombre' => $value['nombre'] , 
                     'apellido' => 'usuario-jugador' ,
-                    'email' => $value['nombre'].'_'.$request -> input('nombre').'@gmail.com' ,
+                    'email' => $value['nombre'].'_'.$torneoName.'_'.$id_equipo.'@gmail.com' ,
                     'password' => bcrypt('1234') ,
                     'sexo' => $request -> input('sexo') ,
                     'estado' => 'no-activado'
@@ -157,7 +163,7 @@ class TorneosController extends Controller
                 foreach ($value['jugadores'] as $keyJugador => $valueJugador) {//recorro todos los jugadores , menos el primero que siempre va a ser el representante
                     if($keyJugador > 0)
                     {
-                        $id_jugador = User::create([
+                        $idjugadorAnonimo = User::create([
                             'nombre' => $valueJugador['nombre'] ,
                             'apellido' => $valueJugador['apellido'] ,
                             'email' => time().$keyJugador.'@gmail.com' ,
@@ -166,18 +172,23 @@ class TorneosController extends Controller
                         ])->id;
                         //asigno cada uno de estos jugadores al rol 'anonimo'
                         Rol_persona::create([
-                            'users_id' => $idJugador ,
+                            'users_id' => $idJugadorAnonimo ,
                             'roles_id' => 6
                         ]);                        
                         //los asigno a los anonimos al equipo actual
                         Integrante_equipo::create([
-                            'users_id' => $id_jugador ,
+                            'users_id' => $idjugadorAnonimo ,
                             'equipos_id' =>$id_equipo
                         ]);            
                     }
                 }
             
-        }*/
-        //guardo torneo
+        }
+            \DB::commit();           
+        } catch (Exception $e) {
+            \DB::rollback();
+            dd($e);
+        }
+
        }
 }

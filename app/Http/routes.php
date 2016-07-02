@@ -52,18 +52,18 @@ Route::get('/logout' , [
 ]);
 
 Route::get('crear-torneo' , [
-	'middleware' => ['auth' , 'organizador'] ,
+	'middleware' => ['auth'] ,//organizador
 	'uses' => 'TorneosController@ViewCreate' ,
 	'as' => 'crear-torneo'
 ]);
 
 Route::post('crear-torneo' , [
-	'middleware' => ['auth' , 'organizador'] , 
+	'middleware' => ['auth'] , //organizador
 	'uses' => 'TorneosController@Add'
 ]);
 
 Route::get('torneos' , [
-	'middleware' => ['auth' , 'organizador'] , 
+	'middleware' => ['auth'] ,//organizador 
 	'as' => 'torneos' ,
 	'uses' => 'TorneosController@showAll'
 ]);

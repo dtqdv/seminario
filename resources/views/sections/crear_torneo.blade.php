@@ -136,8 +136,19 @@
                     <div>
                     {{Form::text('nombre_equipo_'.$i , null , ['placeholder' => 'Nombre de equipo'])}}
                     </div>
+                    @if($errors->has('nombre_equipo_'.$i))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('nombre_equipo_'.$i) }}</strong>
+                        </span>
                     <div>
+                    @endif
                     {{Form::text('representantes_email_equipo_'.$i , null , ['placeholder' => 'Email de representante'])}}
+                    @if($errors->has('representantes_email_equipo_'.$i))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('representantes_email_equipo_'.$i) }}</strong>
+                        </span>
+                    @endif
+                    <div>
                     </div>
                 <div class="row con_agregar">
                     <div class="col-md-6">
@@ -153,8 +164,19 @@
                     @for($c = 0;$c < ( $cantidad[$i]['jugadores'] + 1);$c++)
                     
                         {{Form::text('jugador_'.$c.'_nombre_equipo_'.$i , null , ['placeholder' => 'Nombre'])}}
+                        @if($errors->has('jugador_'.$c.'_nombre_equipo_'.$i))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('jugador_'.$c.'_nombre_equipo_'.$i) }}</strong>
+                        </span>
+                       
+                        @endif
                         {{Form::text('jugador_'.$c.'_apellido_equipo_'.$i , null , ['placeholder' => 'Apellido'])}}
-                    
+                        
+                        @if($errors->has('jugador_'.$c.'_apellido_equipo_'.$i))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('jugador_'.$c.'_apellido_equipo_'.$i) }}</strong>
+                        </span>
+                        @endif                   
                     @endfor
                 </div>                    
                 </div>
@@ -162,12 +184,15 @@
                 @endfor
                
                 @else
-                <div class='wrapper-equipos'>
+                    <div class='wrapper-equipos'>
                     <div>
                     {{Form::text('nombre_equipo_0' , null , ['placeholder' => 'Nombre de equipo'])}}
                     </div>
+
+
                     <div>
                     {{Form::text('representantes_email_equipo_0' , null , ['placeholder' => 'Email de representante'])}}
+
                     </div>
                 <div class="row con_agregar">
                     <div class="col-md-6">

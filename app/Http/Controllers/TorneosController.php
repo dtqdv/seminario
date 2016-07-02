@@ -67,15 +67,22 @@ class TorneosController extends Controller
 
         $rulesTeams = CrearTorneo::generateValidationRulesTeams($request -> input());
         $reglas = CrearTorneo::pushValidationRulesTeams($reglas , $rulesTeams);
-        
+        $dataTorneo = CrearTorneo::generateDataValidator($dataTorneo , $request -> input());
         $equipos = CrearTorneo::generateCountEquiposJugadores($request -> input());
         
         $validator = Validator::make($dataTorneo , $reglas , $messages);
+        echo '<pre>';
+            print_r($dataTorneo);
+        echo '</pre>';
+
+        echo '<pre>';
+            print_r($reglas);
+        echo '</pre>';
         
-        //return dd($equipos);
+        
         if($validator -> fails())
         {
-           return redirect('/crear-torneo')->withInput($request -> input())->with('equipos' , $equipos);
+           return redirect('/crear-torneo')->withInput($request -> input())->with('equipos' , $equipos)->withErrors($validator);
         }
         /*$id_torneo = Torneo::create([
             'nombre' => $request -> input('nombre') ,

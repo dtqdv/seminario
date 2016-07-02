@@ -56,6 +56,41 @@ class CrearTorneo
 
 	}
 
+	public static function generateDataValidator($dataDefault , $input)
+	{
+		$counterTeams = 0;
+		$statusTeams = true;
+		$nameTeam = 'nombre_equipo_';
+		$nameRepresentante = 'representantes_email_equipo_';
+		$dataNew = $dataDefault;
+		while ($statusTeams == true) {
+			if(array_key_exists($nameTeam.$counterTeams , $input) && array_key_exists($nameRepresentante.$counterTeams , $input)){
+				$counterPlayers = 0;
+				$statusPlayers = true;
+				$dataNew[$nameTeam.$counterTeams] = $input[$nameTeam.$counterTeams];
+				$dataNew[$nameRepresentante.$counterTeams] = $input[$nameRepresentante.$counterTeams];
+				while ($statusPlayers == true) {
+					if(array_key_exists('jugador_'.$counterPlayers.'_nombre_equipo_'.$counterTeams , $input) && array_key_exists('jugador_'.$counterPlayers.'_apellido_equipo_'.$counterTeams , $input)){
+						
+						$dataNew['jugador_'.$counterPlayers.'_nombre_equipo_'.$counterTeams] = $input['jugador_'.$counterPlayers.'_nombre_equipo_'.$counterTeams];
+						$dataNew['jugador_'.$counterPlayers.'_apellido_equipo_'.$counterTeams] = $input['jugador_'.$counterPlayers.'_apellido_equipo_'.$counterTeams];
+
+						$counterPlayers = $counterPlayers + 1;
+					
+					}else{
+						$statusPlayers = false;
+					}
+				
+				}
+
+				$counterTeams = $counterTeams + 1;
+			}else{
+				$statusTeams = false;
+			}
+		}
+		return $dataNew;			
+	}
+
 	public static function generateCountEquiposJugadores($input)
 	{
 		$equipos = [];

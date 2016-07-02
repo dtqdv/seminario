@@ -121,9 +121,10 @@
                         <h3><span>Equipos</span></h3>
                     </div>
                     <div class="col-md-6">
-                    <a href="">Guardar</a>
+                    <a href="" id='agregar-equipo'>Agregar Equipo</a>
                     </div>
                 </div>
+                <div class='wrapper-equipos'>
                     <div>
                     {{Form::text('nombre_equipo_0' , null , ['placeholder' => 'Nombre de equipo'])}}
                     </div>
@@ -135,68 +136,18 @@
                         <h3><span>jugadores</span></h3>
                     </div>
                     <div class="col-md-6">
-                        <button type="button" data-toggle="modal" data-target="#myModal">Agregar</button>
+                        <a class='agregar-jugador' href="">Agregar Jugador</a>
                     </div>
                 </div>
                 <p class="mensaje-min">Podés agregar jugadores a este equipo o dejarle esta tarea al representante</p>
-                    <div>
+                    <div class='wrapper-jugador'>
                         {{Form::text('jugador_0_nombre_equipo_0' , null , ['placeholder' => 'Nombre'])}}
                         {{Form::text('jugador_0_apellido_equipo_0' , null , ['placeholder' => 'Apellido'])}}
                     </div>
-                    <div>
-                        {{Form::text('jugador_1_nombre_equipo_0' , null , ['placeholder' => 'Nombre'])}}
-                        {{Form::text('jugador_1_apellido_equipo_0' , null , ['placeholder' => 'Apellido'])}}
-                    </div>
-                    <div>
-                        {{Form::text('jugador_2_nombre_equipo_0' , null , ['placeholder' => 'Nombre'])}}
-                        {{Form::text('jugador_2_apellido_equipo_0' , null , ['placeholder' => 'Apellido'])}}
-                    </div>
-                    <div>
-                        {{Form::text('jugador_3_nombre_equipo_0' , null , ['placeholder' => 'Nombre'])}}
-                        {{Form::text('jugador_3_apellido_equipo_0' , null , ['placeholder' => 'Apellido'])}}
-                    </div>
-            </div>
-            <div>
-                <div class="row con_agregar">
-                    <div class="col-md-6">
-                        <h3><span>Equipos</span></h3>
-                    </div>
-                    <div class="col-md-6">
-                    <a href="">Guardar</a>
-                    </div>
+             
                 </div>
-                    <div>
-                    {{Form::text('nombre_equipo_1' , null , ['placeholder' => 'Nombre de equipo'])}}
-                    </div>
-                    <div>
-                    {{Form::text('representantes_email_equipo_1' , null , ['placeholder' => 'Email de representante'])}}
-                    </div>
-                <div class="row con_agregar">
-                    <div class="col-md-6">
-                        <h3><span>jugadores</span></h3>
-                    </div>
-                    <div class="col-md-6">
-                        <button type="button" data-toggle="modal" data-target="#myModal">Agregar</button>
-                    </div>
-                </div>
-                <p class="mensaje-min">Podés agregar jugadores a este equipo o dejarle esta tarea al representante</p>
-                    <div>
-                        {{Form::text('jugador_0_nombre_equipo_1' , null , ['placeholder' => 'Nombre'])}}
-                        {{Form::text('jugador_0_apellido_equipo_1' , null , ['placeholder' => 'Apellido'])}}
-                    </div>
-                    <div>
-                        {{Form::text('jugador_1_nombre_equipo_1' , null , ['placeholder' => 'Nombre'])}}
-                        {{Form::text('jugador_1_apellido_equipo_1' , null , ['placeholder' => 'Apellido'])}}
-                    </div>
-                    <div>
-                        {{Form::text('jugador_2_nombre_equipo_1' , null , ['placeholder' => 'Nombre'])}}
-                        {{Form::text('jugador_2_apellido_equipo_1' , null , ['placeholder' => 'Apellido'])}}
-                    </div>
-                    <div>
-                        {{Form::text('jugador_3_nombre_equipo_1' , null , ['placeholder' => 'Nombre'])}}
-                        {{Form::text('jugador_3_apellido_equipo_1' , null , ['placeholder' => 'Apellido'])}}
-                    </div>
             </div>
+
         </section>
             <section id="paso-cuatro" class="container">
                 <div class="text-center"><img src="img/pasonum-4.png" alt="Paso 2"></div>

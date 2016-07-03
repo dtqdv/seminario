@@ -42,6 +42,12 @@ class TorneosController extends Controller
         return view('sections.torneos-editar' , compact('torneo' , 'equipos' , 'user' , 'countEquipos'));
 
     }
+    public function eliminar($id)
+    {
+        return $id;
+        //return $request -> input('id');
+
+    }
     public function actualizar(Request $request)
     {
         $user = Auth::User()->toArray();
@@ -117,7 +123,7 @@ class TorneosController extends Controller
                     'min_equipos' => $request -> input('min_equipos') ,
                     'max_equipos' => $request -> input('max_equipos')                 
                     ]);
-
+                    
                     \DB::commit();
                      
                 } catch (Exception $e) {
@@ -166,7 +172,7 @@ class TorneosController extends Controller
             'sexo' => 'required|in:F,M' ,
             'categoria' => 'required|in:+18,+30,libre,sub-20',
             'lugar' => 'required' ,
-            'cancha' => 'required|numeric' ,
+            'num_cancha' => 'required|numeric' ,
             'fecha_inicio' => 'required|date' ,
             'min_equipos' => 'required|numeric' ,
             'max_equipos' => 'required|numeric' 

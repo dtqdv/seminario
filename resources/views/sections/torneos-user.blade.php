@@ -23,7 +23,7 @@
                         </td>
                         <td class='iconos text-left ultima'>
                             {{link_to_route('torneo' , 'editar' , ['id' => $torneos[$i]['id']] , [])}}
-
+                            {{link_to_route('eliminar' , 'eliminar' , ['id' => $torneos[$i]['id']])}}
                             <!--<a href="#"><img class="editar" src="img/editar.png" alt="Editar"></a><a href="#"><img class="borrar" src="img/borrar.png" alt="Borrar"></a>-->
                         </td>
                     </tr>

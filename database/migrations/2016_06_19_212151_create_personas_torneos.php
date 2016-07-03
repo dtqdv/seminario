@@ -17,8 +17,8 @@ class CreatePersonasTorneos extends Migration
             $table->timestamps();
             $table->integer('users_id')->unsigned();
             $table->integer('torneos_id')->unsigned();
-            $table->foreign('users_id')->references('id')->on('users');
-            $table->foreign('torneos_id')->references('id')->on('torneos');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('torneos_id')->references('id')->on('torneos')->onDelete('cascade');
             $table->softDeletes();
         });
     }

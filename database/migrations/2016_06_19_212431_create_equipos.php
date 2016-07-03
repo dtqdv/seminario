@@ -18,7 +18,7 @@ class CreateEquipos extends Migration
             $table->string('nombre' , 30);
             $table->string('escudo' , 45)->nullable();
             $table->integer('torneos_id')->unsigned();
-            $table->foreign('torneos_id')->references('id')->on('torneos');
+            $table->foreign('torneos_id')->references('id')->on('torneos')->onDelete('cascade');
             $table->smallInteger('saldo')->nullable();
             $table->softDeletes();
         });

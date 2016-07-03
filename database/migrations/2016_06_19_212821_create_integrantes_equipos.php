@@ -17,8 +17,8 @@ class CreateIntegrantesEquipos extends Migration
             $table->timestamps();
             $table->integer('users_id')->unsigned();
             $table->integer('equipos_id')->unsigned();
-            $table->foreign('users_id')->references('id')->on('users');
-            $table->foreign('equipos_id')->references('id')->on('equipos');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('equipos_id')->references('id')->on('equipos')->onDelete('cascade');
             $table->tinyInteger('numero')->nullable();
             $table->softDeletes();
         });

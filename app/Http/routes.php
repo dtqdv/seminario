@@ -78,3 +78,9 @@ Route::post('actualizar-torneo' , [
 	'as' => 'actualizar-torneos' ,
 	'uses' => 'TorneosController@actualizar'
 ]);
+
+Route::get('/eliminar/torneo/{id}' , [
+	'middleware' => ['auth'] ,
+	'as' => 'eliminar' ,
+	'uses' => 'TorneosController@eliminar'
+]);

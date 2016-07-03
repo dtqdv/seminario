@@ -28,5 +28,10 @@ class Equipo extends Model
         return $this -> belongsTo('App\Torneo' , 'equipos_id' , 'id');
     }
 
+    public static function getEquipos($idTorneo)
+    {
+        return Equipo::where('torneos_id' , '=' , $idTorneo) -> get() -> toArray();
+    } 
+
 
 }

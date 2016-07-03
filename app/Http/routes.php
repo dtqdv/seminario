@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::auth();
 
-Route::post('/login' , [
+Route::post('/login' , [//accion login
 	'as' => 'login' , 
 	'uses' => 'Auth\AuthController@loginDtqdv'
 ]);

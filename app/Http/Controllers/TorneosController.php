@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as Auth;
 use App\Http\Requests;
 use App\Dtqdv\CrearTorneo as CrearTorneo;
+use App\Dtqdv\VerTorneos as VerTorneos;
 use App\Torneo as Torneo; //1 agrego torneo y guardo id de torneo agregado
 use App\Personas_torneos as Personas_torneos; //2 a que persona le pertenece el torneo
 use App\Equipo as Equipo;//3 agrego equipos con id de torneo
@@ -25,17 +26,23 @@ class TorneosController extends Controller
     public function showAll()
     {
         $user = Auth::User()->toArray();
-        $id = $user['id'];
         $section = 'Tus torneos';
-        
-        $torneos = Personas_torneos::getTorneosFromUser($id);
-        
+        $torneos = Torneo::getTorneosFromUser($user['id']);
         return view('sections.torneos-user' , compact('user' , 'section' , 'torneos'));
     }
-    public function showOne($id)
+
+    public function showOne($idTorneo)
     {   
-        return $id;
+        $user = Auth::User()->toArray();
+        $torneo = Torneo::getOne($idTorneo , $user['id']) -> toArray();
+        $teams = Equipo::getEquipos($idTorneo);
+        $integrantes = User::players();
+        $equipos = VerTorneos::armarEquipos($teams , $integrantes);
+        
+        return view('sections.torneos-editar' , compact('torneo' , 'equipos' , 'user'));
+
     }
+
     public function Add(Request $request)
     {
         //obtengo el usuario
@@ -49,7 +56,7 @@ class TorneosController extends Controller
             'sexo' => $request -> input('sexo') ,
             'categoria' => $request -> input('categoria') ,
             'lugar' => $request -> input('lugar') ,
-            'cancha' => $request -> input('cancha') ,
+            'num_cancha' => $request -> input('cancha') ,
             'fecha_inicio' => $request -> input('fecha_inicio') ,
             'min_equipos' => $request -> input('min_equipos') ,
             'max_equipos' => $request -> input('max_equipos') 
@@ -88,15 +95,22 @@ class TorneosController extends Controller
         //ejecuto el validador
        
         //evaluo si los datos no son validos
-        /*if($validator -> fails())
+        if($validator -> fails())
         {
            return redirect('/crear-torneo')->withInput($request -> input())->with('equipos' , $equiposCount)->withErrors($validator);
-        }*/
+        }
         //evaluo si los datos no son validos
         
         //parseo equipos
         $equipos = CrearTorneo::parse($request -> input());
+        echo '<pre>';
+        print_r($dataTorneo);
+        echo '</pre>';
+        echo '<pre>';
+        print_r($equipos);
+        echo '</pre>';
         //parseo equipos
+        
         \DB::beginTransaction();
         //creo el torneo
         try {
@@ -148,10 +162,10 @@ class TorneosController extends Controller
                     'equipos_id' =>$id_equipo
                 ]);
                 //guardo el tipo de usuario jugador desactivado , lo tiene que activar el representante
-                $torneoName = str_replace(' ', '_', input('nombre'));
+                $torneoName = str_replace(' ', '_', $request -> input('nombre'));
                 $idJugador = User::create([
-                    'nombre' => $value['nombre'] , 
-                    'apellido' => 'usuario-jugador' ,
+                    'nombre' => $torneoName , 
+                    'apellido' =>  $value['nombre'],
                     'email' => $value['nombre'].'_'.$torneoName.'_'.$id_equipo.'@gmail.com' ,
                     'password' => bcrypt('1234') ,
                     'sexo' => $request -> input('sexo') ,
@@ -179,7 +193,7 @@ class TorneosController extends Controller
                         ])->id;
                         //asigno cada uno de estos jugadores al rol 'anonimo'
                         Rol_persona::create([
-                            'users_id' => $idJugadorAnonimo ,
+                            'users_id' => $idjugadorAnonimo ,
                             'roles_id' => 6
                         ]);                        
                         //los asigno a los anonimos al equipo actual

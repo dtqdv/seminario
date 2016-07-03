@@ -73,3 +73,8 @@ Route::get('torneos/{id}' , [
 	'as' => 'torneo' ,
 	'uses' => 'TorneosController@showOne'
 ]);
+Route::post('actualizar-torneo' , [
+	'middleware' => ['auth'] ,
+	'as' => 'actualizar-torneos' ,
+	'uses' => 'TorneosController@actualizar'
+]);

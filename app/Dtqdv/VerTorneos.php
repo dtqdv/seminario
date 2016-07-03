@@ -26,4 +26,13 @@ class VerTorneos
 	
 		return $equipos;
 	}
+	static public function countEquipos($equipos)
+	{
+		$count = [];
+		foreach ($equipos as $key => $value) {
+			$count[$key]['jugadores'] = (count($value['integrantes']) - 1);
+		}
+
+		return $count;
+	}
 }

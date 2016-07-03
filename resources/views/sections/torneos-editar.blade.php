@@ -10,7 +10,8 @@
 <main>
 <div class="portada-editar roboto"><h1 class="roboto">Panel de Control</h1></div>
     <div id="pasos">
-    {{Form::open(['url' => 'crear-torneo' , 'method' => 'post'])}}
+    {{Form::open(['url' => 'actualizar-torneo' , 'method' => 'post'])}}
+    {{Form::hidden('id_torneo' , $torneo['id'])}}
         <div class="slider">
         <section id="paso-uno" class="text-center container">
             <div class="text-center"><img src="img/pasonum-1.png" alt="Paso 1"></div>
@@ -184,8 +185,9 @@
                 @endfor
                
                 @else
+                	<div class='wrapper-equipos'>
                 	@for($i = 0;$i < count($equipos); $i++)
-                    <div class='wrapper-equipos'>
+                    
                     <div>
                     {{Form::text('nombre_equipo_'.$i , $equipos[$i]['nombre'] , ['placeholder' => 'Nombre de equipo'])}}
                     </div>
@@ -204,13 +206,15 @@
                     	</div>
                 	</div>
                 		<p class="mensaje-min">Podés agregar jugadores a este equipo o dejarle esta tarea al representante</p>
+                		<div class='wrapper-jugador'>
                     @for($c = 0;$c < count($equipos[$i]['integrantes']); $c++)
-						<div class='wrapper-jugador'>
+						
                         	{{Form::text('jugador_'.$c.'_nombre_equipo_'.$i , $equipos[$i]['integrantes'][$c]['nombre'] , ['placeholder' => 'Nombre'])}}
                         	{{Form::text('jugador_'.$c.'_apellido_equipo_'.$i , $equipos[$i]['integrantes'][$c]['apellido'] , ['placeholder' => 'Apellido'])}}
-                    	</div>
+                    	
              
                     @endfor
+                    </div>
 
                 
                 	@endfor
@@ -321,8 +325,8 @@
 <script>
     @if(Session::has('equipos'))
         var equipos = <?=json_encode(Session::get('equipos'))?>
-    @else
-    var equipos = [{jugadores : 0}];
+    @else 
+    var equipos = <?=json_encode($countEquipos)?>
     @endif
 
     console.log(equipos);

@@ -38,11 +38,101 @@ class TorneosController extends Controller
         $teams = Equipo::getEquipos($idTorneo);
         $integrantes = User::players();
         $equipos = VerTorneos::armarEquipos($teams , $integrantes);
-        
-        return view('sections.torneos-editar' , compact('torneo' , 'equipos' , 'user'));
+        $countEquipos = VerTorneos::countEquipos($equipos);
+        return view('sections.torneos-editar' , compact('torneo' , 'equipos' , 'user' , 'countEquipos'));
 
     }
+    public function actualizar(Request $request)
+    {
+        $user = Auth::User()->toArray();
+        $dataTorneo= [
+            'nombre' => $request -> input('nombre') ,
+            'precio_inscripcion' => $request -> input('precio_inscripcion') ,
+            'sexo' => $request -> input('sexo') ,
+            'categoria' => $request -> input('categoria') ,
+            'lugar' => $request -> input('lugar') ,
+            'num_cancha' => $request -> input('cancha') ,
+            'fecha_inicio' => $request -> input('fecha_inicio') ,
+            'min_equipos' => $request -> input('min_equipos') ,
+            'max_equipos' => $request -> input('max_equipos') 
+        ];
 
+        $messages = [
+            'required' => 'El :attribute no puede estar vacio' ,
+            'numeric' => 'El :attribute debe ser un numero' ,
+            'sexo' => 'El sexo tiene que ser femenino o masculino' ,
+            'categoria.in' => 'La categoria tiene que ser +18,+30,libre o sub-20' ,
+            'date' => 'Tiene que ser de formato fecha'
+        ];
+        
+        $reglas = [
+            'nombre' => 'required' , 
+            'precio_inscripcion' => 'required|numeric' ,
+            'sexo' => 'required|in:F,M' ,
+            'categoria' => 'required|in:+18,+30,libre,sub-20',
+            'lugar' => 'required' ,
+            'cancha' => 'required|numeric' ,
+            'fecha_inicio' => 'required|date' ,
+            'min_equipos' => 'required|numeric' ,
+            'max_equipos' => 'required|numeric' 
+        ];
+        //defino las reglas de validacion estaticas , todos los mensajes de error y los datos estaticos que llegan
+
+        //proceso todas las reglas y datos dinamicos        
+        $reglas = CrearTorneo::generarValidaciones($reglas , $request -> input());
+        $dataTorneo = CrearTorneo::generarDataValidaciones($dataTorneo , $request -> input());
+        $equiposCount = CrearTorneo::contarEquipos($request -> input());
+        
+        //proceso todas las reglas y datos dinamicos        
+
+        //ejecuto el validador
+        $validator = Validator::make($dataTorneo , $reglas , $messages);
+        //ejecuto el validador
+       
+        //evaluo si los datos no son validos
+        /*if($validator -> fails())
+        {
+           return redirect('/crear-torneo')->withInput($request -> input())->with('equipos' , $equiposCount)->withErrors($validator);
+        }*/
+        //evaluo si los datos no son validos
+        
+        //parseo equipos
+        $equipos = CrearTorneo::parse($request -> input());
+        $check = Torneo::with('persona') -> where('id' , $request -> input('id_torneo')) -> limit(1) -> get() -> toArray();
+        if(count($check) > 0){
+            
+            if($check[0]['persona'][0]['id'] == $user['id']){
+                \DB::beginTransaction();
+                try {
+
+            
+                    $torneoActualizado = Torneo::where('id' , $request -> input('id_torneo')) -> update([
+                    'nombre' => $request -> input('nombre') ,
+                    'precio_inscripcion' => $request -> input('precio_inscripcion') ,
+                    'sexo' => $request -> input('sexo') ,
+                    'categoria' => $request -> input('categoria') ,
+                    'lugar' => $request -> input('lugar') ,
+                    'num_cancha' => $request -> input('cancha') ,
+                    'fecha_inicio' => $request -> input('fecha_inicio') ,
+                    'min_equipos' => $request -> input('min_equipos') ,
+                    'max_equipos' => $request -> input('max_equipos')                 
+                    ]);
+
+                    \DB::commit();
+                     
+                } catch (Exception $e) {
+                    \DB::rollback();
+                }
+            }else{
+                return 'este torneo no es tuyo';
+            }            
+        }else{
+            return 'torneo no encontrado';
+        }
+
+
+
+    }
     public function Add(Request $request)
     {
         //obtengo el usuario
@@ -103,12 +193,6 @@ class TorneosController extends Controller
         
         //parseo equipos
         $equipos = CrearTorneo::parse($request -> input());
-        echo '<pre>';
-        print_r($dataTorneo);
-        echo '</pre>';
-        echo '<pre>';
-        print_r($equipos);
-        echo '</pre>';
         //parseo equipos
         
         \DB::beginTransaction();

@@ -32,16 +32,13 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Torneos</a></li>
-                    <li><a href="#">Contacto</a></li>
-                    <li><a href="#">Prode</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-search buscar"></span></a></li>
+                    <li>{{link_to_route('mis_torneos' , 'Mis Torneos' , [])}}</li>
+                    <li>{{link_to_route('torneos' , 'Torneos' , [])}}</li>
+                    <li>{{link_to_route('crear_torneo' , 'Crear Torneo' , [])}}</li>
+                    <!--<li><a href="#"><span class="glyphicon glyphicon-search buscar"></span></a></li>-->
                     <li class="dropdown">
                         <a class="dropdown-toggle user-btn" data-toggle="dropdown" href="#">{{$user['nombre']}} <span class="glyphicon glyphicon-chevron-down"></span></a>
                         <ul class="dropdown-menu">
-                            <!--<li><a href="#">Contenido</a></li>-->
-                            <li>{{link_to_route('torneos', 'Ver mis torneos' ,[], [])}}</li>
                             <li>{{link_to_route('logout' , 'logout' , [] , [])}}</li>
                         </ul>
                     </li>

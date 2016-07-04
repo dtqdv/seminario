@@ -95,7 +95,8 @@ class AuthController extends Controller
         ] , $messages);
 
         if (\Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
-            return redirect()->intended('/');
+            //return redirect('/torneos/crear');
+            return 'logueado';
         }else{
             return redirect()->intended('/login')->withErrors($validator)->withInput();
         }       

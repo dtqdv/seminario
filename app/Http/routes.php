@@ -14,20 +14,22 @@
 	Auth::logout();
 });*/
 
-Route::get('/', function () {
-    return view('sections.home');
-});
-
+//vistas//
 Route::auth();
-
-Route::post('/login' , [//accion login
-	'as' => 'login' , 
-	'uses' => 'Auth\AuthController@loginDtqdv'
+Route::get('/', [
+	'as' => 'home' , 
+	'uses' => function()
+	{
+		return view('sections.home');
+	}
 ]);
 
-Route::get('/home', [
-	'uses' => 'HomeController@index' ,
-	'as' => 'home'
+Route::get('/torneos' , [
+	'as' => 'torneos' ,
+	'uses' => function()
+	{
+		return 'torneos';
+	}
 ]);
 
 Route::get('/login' , [
@@ -46,25 +48,15 @@ Route::get('/register' , [
 	}
 ]);
 
-Route::get('/logout' , [
-	'as' => 'logout' , 
-	'uses' => 'Auth\AuthController@logoutDtqdv'
-]);
-
-Route::get('crear-torneo' , [
+Route::get('torneos/crear' , [
 	'middleware' => ['auth'] ,//organizador
 	'uses' => 'TorneosController@ViewCreate' ,
-	'as' => 'crear-torneo'
+	'as' => 'crear_torneo'
 ]);
 
-Route::post('crear-torneo' , [
-	'middleware' => ['auth'] , //organizador
-	'uses' => 'TorneosController@Add'
-]);
-
-Route::get('torneos' , [
+Route::get('/mis_torneos' , [
 	'middleware' => ['auth'] ,//organizador 
-	'as' => 'torneos' ,
+	'as' => 'mis_torneos' ,
 	'uses' => 'TorneosController@showAll'
 ]);
 
@@ -73,6 +65,27 @@ Route::get('torneos/{id}' , [
 	'as' => 'torneo' ,
 	'uses' => 'TorneosController@showOne'
 ]);
+
+
+//vistas//
+
+//acciones//
+Route::post('/login' , [//accion login
+	'as' => 'login_action' , 
+	'uses' => 'Auth\AuthController@loginDtqdv'
+]);
+
+Route::get('/logout' , [
+	'as' => 'logout' , 
+	'uses' => 'Auth\AuthController@logoutDtqdv'
+]);
+
+Route::post('torneos/crear' , [
+	'as' => 'crear_torneo_action' , 
+	'middleware' => ['auth'] , //organizador
+	'uses' => 'TorneosController@Add'
+]);
+
 Route::post('actualizar-torneo' , [
 	'middleware' => ['auth'] ,
 	'as' => 'actualizar-torneos' ,
@@ -84,3 +97,9 @@ Route::get('/eliminar/torneo/{id}' , [
 	'as' => 'eliminar' ,
 	'uses' => 'TorneosController@eliminar'
 ]);
+//acciones//
+/*
+Route::get('/home', [
+	'uses' => 'HomeController@index' ,
+	'as' => 'home'
+]);*/

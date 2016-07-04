@@ -10,7 +10,7 @@
     </div>
 </div>
 <div class="row row-form">
-    {{Form::open(['url' => '/login' , 'method' => 'post' , 'class' => 'col-xs-10 col-sm-10 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-offset-1 col-xs-offset-1'])}}
+    {{Form::open(['route' => 'login_action' , 'method' => 'post' , 'class' => 'col-xs-10 col-sm-10 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-offset-1 col-xs-offset-1'])}}
     <div class='row'>
         <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center wrapper-message'>
             <span>Hola Campeon!</span>

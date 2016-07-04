@@ -28,29 +28,13 @@
                         </td>
                     </tr>
                 @endfor
-                <!--<tr>
-                    <td class="text-left primer">Supertazon Isotopos</td>
-                    <td class="iconos text-left ultima"><a href="#"><img class="editar" src="img/editar.png" alt="Editar"></a><a href="#"><img class="borrar" src="img/borrar.png" alt="Borrar"></a></td>
-                </tr>
-                <tr>
-                    <td class="text-left primer">Torneo Lanus</td>
-                    <td class="iconos text-left ultima"><a href="#"><img class="editar" src="img/editar.png" alt="Editar"></a><a href="#"><img class="borrar" src="img/borrar.png" alt="Borrar"></a></td>
-                </tr>
-                <tr>
-                    <td class="text-left primer">Caca con choclo</td>
-                    <td class="iconos text-left ultima"><a href="#"><img class="editar" src="img/editar.png" alt="Editar"></a><a href="#"><img class="borrar" src="img/borrar.png" alt="Borrar"></a></td>
-                </tr>
-                <tr>
-                    <td class="text-left primer">Torneo de peques</td>
-                    <td class="iconos text-left ultima"><a href="#"><img class="editar" src="img/editar.png" alt="Editar"></a><a href="#"><img class="borrar" src="img/borrar.png" alt="Borrar"></a></td>
-                </tr>-->
+                
                 </tbody>
             </table>
             @else
                 <div>No creaste ningun torneo</div>
             @endif
-            {{link_to_route('crear-torneo' , 'Crear Torneo')}}
-            <!--<input type="button" value="Crear Torneo" class="btn btn-block btn-torneo">-->
+            {{link_to_route('crear_torneo' , 'Crear Torneo')}}
         </div>
     </div>
 </main>

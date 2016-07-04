@@ -10,7 +10,7 @@
 <main>
 <div class="portada-editar roboto"><h1 class="roboto">Panel de Control</h1></div>
     <div id="pasos">
-    {{Form::open(['url' => 'crear-torneo' , 'method' => 'post'])}}
+    {{Form::open(['route' => 'crear_torneo_action' , 'method' => 'post'])}}
         <div class="slider">
         <section id="paso-uno" class="text-center container">
             <div class="text-center"><img src="img/pasonum-1.png" alt="Paso 1"></div>

@@ -9,24 +9,11 @@
     <div class="container">
         <nav>
             <ul class="row margen-abajo">
-                <li class="col-md-2">
-                {{link_to_route('home' , 'Inicio')}}
-                </li>
-                <li class="col-md-2">
-                    <a href="#">Torneos</a>
-                </li>
-                <li class="col-md-2">
-                    <a href="#">Contacto</a>
-                </li>
-                <li class="col-md-2">
-                    {{link_to_route('login' , 'Login')}}
-                </li>
-                <li class="col-md-2">
-                    {{link_to_route('registro' , 'Registro')}}
-                </li>
-                <li class="col-md-2">
-                    <a href="#"><img src="img/buscar.png" alt="Buscar"></a>
-                </li>
+            <li class='col-md-3'>{{link_to_route('home' , 'Inicio' , [])}}</li>
+            <li class='col-md-3'>{{link_to_route('torneos' , 'Torneos' , [])}}</li>
+            <li class='col-md-3'>{{link_to_route('login' , 'Login' , [])}}</li>
+            <li class='col-md-3'>{{link_to_route('registro' , 'Registro' , [] ,  ['class' => 'recuadro'])}}</li>
+            <!--<li class="col-md-2"><a href="#"><img src="img/buscar.png" alt="Buscar"></a></li>-->
             </ul>
         </nav>
     </div>
@@ -57,7 +44,8 @@
             <div class="row">
                 <h2>Muy facil de utilizar</h2>
                 <p class="text-center col-md-4 pasosp">Implementamos un sistema sencillo para que cualquier usario pueda utilizarlo y que a la hora de jugar solo haya diversión.</p>
-                <input type="button" value="Crear Torneo" class="btn btn-torneo mover-derecha-2">
+                {{link_to_route('crear_torneo' , 'Crear Torneo' , ['class' => 'btn btn-torneo mover-derecha-2'])}}
+                <!--<input type="button" value="Crear Torneo" class="btn btn-torneo mover-derecha-2">-->
                 <div class="col-md-offset-2 col-md-8">
                     <div class="col-md-4">
                         <figure>
@@ -86,14 +74,15 @@
     </section>
     <section class="container-fluid tabla">
         <div class="container text-center">
-            <div class="col-md-6 float-left text-left">
+            <div class="col-md-7 float-left text-left">
                 <div class="degradeText"><h2>Torneos</h2></div>
                 <p class="texto-pers">Hacemos posible tus ganas de encontrar otros torneos ajenos al tuyo.
                     Contamos con listados de todos los torneos creados hasta la fecha para
                     que puedas participar de ellos de diferentes formas.</p>
-                <input type="button" value="Ver Torneos" class="btn btn-block btn-torneo ver">
+                    {{link_to_route('torneos' , 'Ver torneos' , [] , ['class' => 'btn btn-block btn-torneo ver'])}}
+                <!--<input type="button" value="Ver Torneos" class="btn btn-block btn-torneo ver">-->
             </div>
-            <div class="col-md-6 pull-right">
+            <div class="col-md-5 pull-right">
                 <img src="img/tablet.png" alt="Tabla en tablet">
             </div>
         </div>
@@ -180,7 +169,9 @@
             <div class="hidden-sm hidden-xs text-left">
                 <h3 class="text-center">Hoy creá tu torneo</h3>
                 <div class="btn-block mover-derecha-1">
-                    <input type="button" value="Crear Torneo" class="btn btn-torneo">
+                {{link_to_route('crear_torneo' , 'Crear Torneo' , [] , ['class' => 'btn btn-torneo'])}}
+
+                    <!--<input type="button" value="Crear Torneo" class="btn btn-torneo">-->
                 </div>
                 <div class="col-md-3 mover-derecha mover-abajo">
                     <h4>Ayuda</h4>
@@ -194,11 +185,10 @@
                 <div class="col-md-2 mover-abajo">
                     <h4>Mapa</h4>
                     <ul>
-                        <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Torneos</a></li>
-                        <li><a href="#">Contacto</a></li>
-                        <li><a href="#">Log In</a></li>
-                        <li><a href="#">Registrate</a></li>
+                       <li>{{link_to_route('home' , 'Inicio' , [])}}</li>
+                        <li>{{link_to_route('torneos' , 'Torneos' , [])}}</li>
+                        <li>{{link_to_route('login' , 'Login' , [])}}</li>
+                        <li>{{link_to_route('registro' , 'Registro' , [] , ['class' => 'recuadro'])}}</li>
                     </ul>
                 </div>
                 <div class="col-md-4 redes text-left mover-abajo">

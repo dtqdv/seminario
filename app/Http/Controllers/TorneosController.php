@@ -14,6 +14,7 @@ use App\User as User;
 use App\Rol_persona as Rol_persona;
 use App\Integrante_equipo as Integrante_equipo;
 use Validator;
+
 class TorneosController extends Controller
 {
     public function ViewCreate()
@@ -82,30 +83,33 @@ class TorneosController extends Controller
             'min_equipos' => 'required|numeric' ,
             'max_equipos' => 'required|numeric' 
         ];
+        
         //defino las reglas de validacion estaticas , todos los mensajes de error y los datos estaticos que llegan
 
         //proceso todas las reglas y datos dinamicos        
         $reglas = CrearTorneo::generarValidaciones($reglas , $request -> input());
         $dataTorneo = CrearTorneo::generarDataValidaciones($dataTorneo , $request -> input());
         $equiposCount = CrearTorneo::contarEquipos($request -> input());
+
         
         //proceso todas las reglas y datos dinamicos        
 
         //ejecuto el validador
         $validator = Validator::make($dataTorneo , $reglas , $messages);
         //ejecuto el validador
-       
+
         //evaluo si los datos no son validos
-        /*if($validator -> fails())
+        if($validator -> fails())
         {
-           return redirect('/crear-torneo')->withInput($request -> input())->with('equipos' , $equiposCount)->withErrors($validator);
-        }*/
+           return redirect()-> back() -> withInput($request -> input())->with('equipos' , $equiposCount)->withErrors($validator);
+        }
         //evaluo si los datos no son validos
         
         //parseo equipos
         $equipos = CrearTorneo::parse($request -> input());
+
         $check = Torneo::with('persona') -> where('id' , $request -> input('id_torneo')) -> limit(1) -> get() -> toArray();
-        if(count($check) > 0){
+        if(!empty($check)){
             
             if($check[0]['persona'][0]['id'] == $user['id']){
                 \DB::beginTransaction();
@@ -125,15 +129,17 @@ class TorneosController extends Controller
                     ]);
                     
                     \DB::commit();
-                     
+                      return redirect('/torneos/'.$request -> input('id_torneo'))->withInput($request -> input())->with('exito' , true);
+                    return 'exito';
                 } catch (Exception $e) {
                     \DB::rollback();
+                    return redirect('/torneos/'.$request -> input('id_torneo'))->withInput($request -> input())->with('error_consulta' , true);
                 }
             }else{
-                return 'este torneo no es tuyo';
+                return redirect('/torneos/'.$request -> input('id_torneo'))->withInput($request -> input())->with('error_integridad' , true);
             }            
         }else{
-            return 'torneo no encontrado';
+            return redirect() -> back() ->withInput($request -> input())->with('error_torneo' , true);
         }
 
 
@@ -295,7 +301,8 @@ class TorneosController extends Controller
                 }
             
         }
-            \DB::commit();           
+            \DB::commit();
+            return redirect('/mis_torneos');           
         } catch (Exception $e) {
             \DB::rollback();
             dd($e);

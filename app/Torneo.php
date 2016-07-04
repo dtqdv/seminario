@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes as SoftDeletes;
 
 class Torneo extends Model
 {
+    use SoftDeletes;
 	protected $table = 'torneos';
     protected $fillable = ['nombre' , 'descripcion' , 'lugar' , 'logo' , 'facebook' , 'instagram' , 'twitter' , 'precio_inscripcion' , 'precio_partido' , 'min_equipos' , 'max_equipos'];
 
@@ -27,7 +29,7 @@ class Torneo extends Model
 
     static public function getTorneosFromUser($id)
     {
-        return Personas_torneos::join('users' , 'users.id' , '=' , 'users_id')->join('torneos' , 'torneos.id' , '=' , 'torneos_id') -> where('users.id',  '=' , $id) -> select('torneos.*') -> get() -> toArray();
+        return Personas_torneos::join('users' , 'users.id' , '=' , 'users_id')->join('torneos' , 'torneos.id' , '=' , 'torneos_id') -> where('users.id',  '=' , $id) -> where('torneos.deleted_at' ,'=' , null) ->select('torneos.*') -> get() -> toArray();
     }
 
 }

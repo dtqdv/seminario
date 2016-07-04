@@ -8,6 +8,26 @@
 @endsection
 @section('content')
 <main>
+@if(Session::has('exito'))
+<div>
+    TORNEO EDITADO CON EXITO <!--mensaje de exito --> 
+</div>
+@endif
+@if(Session::has('error_integridad'))
+<div>
+    ESTE TORNEO NO TE PERTENECE
+</div>
+@endif
+@if(Session::has('error_torneo'))
+<div>
+    ESTE TORNEO NO EXISTE MAS.
+</div>
+@endif
+@if(Session::has('error_consulta'))
+<div>
+    HUBO UN PROBLEMA INTENTE MAS TARDE
+</div>
+@endif
 <div class="portada-editar roboto"><h1 class="roboto">Panel de Control</h1></div>
     <div id="pasos">
     {{Form::open(['url' => 'actualizar-torneo' , 'method' => 'post'])}}

@@ -154,6 +154,7 @@
                 
                 @for($i = 0;$i < count($cantidad);$i++)
                 <div class='wrapper-equipos'>
+                <!-- traer ids aca tambien -->
                     <div>
                     {{Form::text('nombre_equipo_'.$i , null , ['placeholder' => 'Nombre de equipo'])}}
                     </div>
@@ -211,7 +212,9 @@
                     <div>
                     {{Form::text('nombre_equipo_'.$i , $equipos[$i]['nombre'] , ['placeholder' => 'Nombre de equipo'])}}
                     </div>
-
+                    <div>
+                        {{Form::hidden('id_equipo' , $equipos[$i]['id'])}}
+                    </div>
 
                     <div>
                     {{Form::text('representantes_email_equipo_'.$i , $equipos[$i]['integrantes'][0]['email'] , ['placeholder' => 'Email de representante'])}}
@@ -231,7 +234,7 @@
 						
                         	{{Form::text('jugador_'.$c.'_nombre_equipo_'.$i , $equipos[$i]['integrantes'][$c]['nombre'] , ['placeholder' => 'Nombre'])}}
                         	{{Form::text('jugador_'.$c.'_apellido_equipo_'.$i , $equipos[$i]['integrantes'][$c]['apellido'] , ['placeholder' => 'Apellido'])}}
-                    	
+                    	   {{Form::hidden('id_jugador' , $equipos[$i]['integrantes'][$c]['id'])}}
              
                     @endfor
                     </div>

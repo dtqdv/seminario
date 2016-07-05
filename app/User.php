@@ -39,7 +39,7 @@ class User extends Authenticatable
 
     static public function players()
     {
-        return User::join('roles_personas' , 'roles_personas.users_id' , '=' , 'users.id') -> join('integrantes_equipos' , 'integrantes_equipos.users_id' , '=' , 'users.id') -> whereIn('roles_personas.roles_id' , [3 , 6]) -> whereIn('integrantes_equipos.equipos_id' , [1 , 2]) -> get() -> toArray();
+        return User::join('roles_personas' , 'roles_personas.users_id' , '=' , 'users.id') -> join('integrantes_equipos' , 'integrantes_equipos.users_id' , '=' , 'users.id') -> whereIn('roles_personas.roles_id' , [3 , 6]) -> whereIn('integrantes_equipos.equipos_id' , [1 , 2])  -> select('users.*' , 'integrantes_equipos.equipos_id') -> get() -> toArray();
     }
 
 }

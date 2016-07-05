@@ -38,15 +38,15 @@ class TorneosController extends Controller
         $torneo = Torneo::getOne($idTorneo , $user['id']) -> toArray();
         $teams = Equipo::getEquipos($idTorneo);
         $integrantes = User::players();
-        $equipos = VerTorneos::armarEquipos($teams , $integrantes);
-        $countEquipos = VerTorneos::countEquipos($equipos);
-        return view('sections.torneos-editar' , compact('torneo' , 'equipos' , 'user' , 'countEquipos'));
-
+        //$equipos = VerTorneos::armarEquipos($teams , $integrantes);
+        //$countEquipos = VerTorneos::countEquipos($equipos);
+        //return view('sections.torneos-editar' , compact('torneo' , 'equipos' , 'user' , 'countEquipos'));
+        return dd($integrantes);
     }
     public function eliminar($id)
     {
-        return $id;
-        //return $request -> input('id');
+        //para hacer soft delete App\Torneo::find($id) -> delete(); // todavia no implemente esto en el controlador aunque ya lo probe en el tinker y funciona faltaria ver que hago con todo lo que pertenece al torneo , users , equipos , etc... creo que les voy a hacer softdelete tambien.
+        //return redirect('/mis_torneos') -> with('exito'); falta probar la redireccion , exito seria la variable que mando en caso de que se elimine el torneo y en blade chequeo si existe la variable , si existe muestro un mensaje de exito , faltaria tambien corroborar que el torneo que llega por id sea de usuario que este intentando eliminarlo , sino cualquier usuario me pasa un torneo que no es de el y chau...
 
     }
     public function actualizar(Request $request)
@@ -91,7 +91,7 @@ class TorneosController extends Controller
         $dataTorneo = CrearTorneo::generarDataValidaciones($dataTorneo , $request -> input());
         $equiposCount = CrearTorneo::contarEquipos($request -> input());
 
-        
+        /*
         //proceso todas las reglas y datos dinamicos        
 
         //ejecuto el validador
@@ -141,7 +141,7 @@ class TorneosController extends Controller
         }else{
             return redirect() -> back() ->withInput($request -> input())->with('error_torneo' , true);
         }
-
+*/
 
 
     }

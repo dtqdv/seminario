@@ -28,7 +28,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/torneos';
+    protected $redirectTo = '/mis_torneos';
 
     /**
      * Create a new authentication controller instance.
@@ -95,8 +95,8 @@ class AuthController extends Controller
         ] , $messages);
 
         if (\Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
-            //return redirect('/torneos/crear');
-            return 'logueado';
+            return redirect('/mis_torneos');
+            
         }else{
             return redirect()->intended('/login')->withErrors($validator)->withInput();
         }       

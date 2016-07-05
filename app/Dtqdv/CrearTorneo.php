@@ -132,12 +132,18 @@ class CrearTorneo
 			if(array_key_exists($keyTeams.$counterTeams, $input) && array_key_exists($keyRepresentante.$counterTeams, $input)){
 				$teams[$counterTeams]['nombre'] = $input[$keyTeams.$counterTeams];
 				$teams[$counterTeams]['representante_email'] = $input[$keyRepresentante.$counterTeams];
+				if(array_key_exists('id_equipo_'.$counterTeams, $input)){
+					$teams[$counterTeams]['id'] = $input['id_equipo_'.$counterTeams];
+				}
 				$counterJugadores = 0;
 				$statusPlayers = true;
 				while($statusPlayers == true){
 					if(array_key_exists('jugador_'.$counterJugadores.'_nombre_equipo_'.$counterTeams, $input) && array_key_exists('jugador_'.$counterJugadores.'_apellido_equipo_'.$counterTeams, $input)){
 						$teams[$counterTeams]['jugadores'][$counterJugadores]['nombre'] = $input['jugador_'.$counterJugadores.'_nombre_equipo_'.$counterTeams];
 						$teams[$counterTeams]['jugadores'][$counterJugadores]['apellido'] = $input['jugador_'.$counterJugadores.'_apellido_equipo_'.$counterTeams];
+						if(array_key_exists('id_jugador_'.$counterJugadores.'_equipo_'.$counterTeams, $input)){
+							$teams[$counterTeams]['jugadores'][$counterJugadores]['id'] = $input['id_jugador_'.$counterJugadores.'_equipo_'.$counterTeams];
+						}
 						$counterJugadores = $counterJugadores + 1;	
 					}else{
 						$statusPlayers = false;

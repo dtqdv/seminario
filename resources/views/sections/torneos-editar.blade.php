@@ -136,114 +136,118 @@
                         @endif
                 </div>
             </div>
-           
-
-           
-            <div>
-                <div class="row con_agregar">
-                    <div class="col-md-6">
-                        <h3><span>Equipos</span></h3>
-                    </div>
-                    <div class="col-md-6">
-                    <a href="" id='agregar-equipo'>Agregar Equipo</a>
-                    </div>
-                </div>
-                <!-- -->
-                @if (Session::has('equipos'))
-                {{--*/ $cantidad = Session::get('equipos') /*--}}
-                
-                @for($i = 0;$i < count($cantidad);$i++)
-                <div class='wrapper-equipos'>
-                <!-- traer ids aca tambien -->
-                    <div>
-                    {{Form::text('nombre_equipo_'.$i , null , ['placeholder' => 'Nombre de equipo'])}}
-                    </div>
-                    @if($errors->has('nombre_equipo_'.$i))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('nombre_equipo_'.$i) }}</strong>
-                        </span>
-                    <div>
-                    @endif
-                    {{Form::text('representantes_email_equipo_'.$i , null , ['placeholder' => 'Email de representante'])}}
-                    @if($errors->has('representantes_email_equipo_'.$i))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('representantes_email_equipo_'.$i) }}</strong>
-                        </span>
-                    @endif
-                    <div>
-                    </div>
-                <div class="row con_agregar">
-                    <div class="col-md-6">
-                        <h3><span>jugadores</span></h3>
-                    </div>
-                    <div class="col-md-6">
-                        <a class='agregar-jugador' href="">Agregar Jugador</a>
-                    </div>
-                </div>
-                <p class="mensaje-min">Podés agregar jugadores a este equipo o dejarle esta tarea al representante</p>
+            <!-- inicio equipos -->
+            <div class="equipos">
                 <div>
-                <div class='wrapper-jugador'>
-                    @for($c = 0;$c < ( $cantidad[$i]['jugadores'] + 1);$c++)
-                    
-                        {{Form::text('jugador_'.$c.'_nombre_equipo_'.$i , null , ['placeholder' => 'Nombre'])}}
-                        @if($errors->has('jugador_'.$c.'_nombre_equipo_'.$i))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('jugador_'.$c.'_nombre_equipo_'.$i) }}</strong>
-                        </span>
-                       
-                        @endif
-                        {{Form::text('jugador_'.$c.'_apellido_equipo_'.$i , null , ['placeholder' => 'Apellido'])}}
-                        
-                        @if($errors->has('jugador_'.$c.'_apellido_equipo_'.$i))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('jugador_'.$c.'_apellido_equipo_'.$i) }}</strong>
-                        </span>
-                        @endif                   
-                    @endfor
-                </div>                    
+                    <button id='agregar-equipo'>Agregar equipo</button>
                 </div>
-                </div>                   
-                @endfor
-               
-                @else
-                	<div class='wrapper-equipos'>
-                	@for($i = 0;$i < count($equipos); $i++)
-                    
-                    <div>
-                    {{Form::text('nombre_equipo_'.$i , $equipos[$i]['nombre'] , ['placeholder' => 'Nombre de equipo'])}}
-                    </div>
-                    <div>
-                        {{Form::hidden('id_equipo' , $equipos[$i]['id'])}}
-                    </div>
-
-                    <div>
-                    {{Form::text('representantes_email_equipo_'.$i , $equipos[$i]['integrantes'][0]['email'] , ['placeholder' => 'Email de representante'])}}
-
-                    </div>
-                	<div class="row con_agregar">
-                    <div class="col-md-6">
-                        <h3><span>jugadores</span></h3>
-                    	</div>
-                    	<div class="col-md-6">
-                        	<a class='agregar-jugador' href="">Agregar Jugador</a>
-                    	</div>
-                	</div>
-                		<p class="mensaje-min">Podés agregar jugadores a este equipo o dejarle esta tarea al representante</p>
-                		<div class='wrapper-jugador'>
-                    @for($c = 0;$c < count($equipos[$i]['integrantes']); $c++)
-						
-                        	{{Form::text('jugador_'.$c.'_nombre_equipo_'.$i , $equipos[$i]['integrantes'][$c]['nombre'] , ['placeholder' => 'Nombre'])}}
-                        	{{Form::text('jugador_'.$c.'_apellido_equipo_'.$i , $equipos[$i]['integrantes'][$c]['apellido'] , ['placeholder' => 'Apellido'])}}
-                    	   {{Form::hidden('id_jugador' , $equipos[$i]['integrantes'][$c]['id'])}}
-             
+                @if (Session::has('equipos'))
+                    {{--*/ $cantidad = Session::get('equipos') /*--}}
+                    @for($i = 0;$i < count($cantidad);$i++)
+                        <div class='wrapper-equipo'>
+                            <div>
+                                {{Form::text('nombre_equipo_'.$i , null , ['placeholder' => 'Nombre de equipo' , 'data-equipo' => $i])}}
+                            </div>
+                                @if($errors->has('nombre_equipo_'.$i))
+                                <div>
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('nombre_equipo_'.$i) }}</strong>
+                                    </span>
+                                </div>
+                                @endif
+                            <div>
+                                {{Form::text('representantes_email_equipo_'.$i , null , ['placeholder' => 'Email de representante'])}}
+                            </div>
+                                @if($errors->has('representantes_email_equipo_'.$i))
+                                <div>
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('representantes_email_equipo_'.$i) }}</strong>
+                                    </span>
+                                </div>
+                                @endif
+                            <div class="agregar-jugador">
+                                Agregar jugador
+                            </div>
+                            <div class="jugadores">
+                                @for($c = 0;$c < ( $cantidad[$i]['jugadores'] + 1);$c++)
+                                    {{Form::text('jugador_'.$c.'_nombre_equipo_'.$i , null , ['placeholder' => 'Nombre' , 'data-jugador' => $c])}}
+                                    @if($errors->has('jugador_'.$c.'_nombre_equipo_'.$i))
+                                        <div>
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('jugador_'.$c.'_nombre_equipo_'.$i) }}</strong>
+                                            </span>
+                                        </div>
+                                    @endif
+                                    {{Form::text('jugador_'.$c.'_apellido_equipo_'.$i , null , ['placeholder' => 'Apellido'])}}
+                                    @if($errors->has('jugador_'.$c.'_apellido_equipo_'.$i))
+                                        <div>
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('jugador_'.$c.'_apellido_equipo_'.$i) }}</strong>
+                                            </span>
+                                        </div>
+                                    @endif
+                                @endfor
+                            </div>
+                        </div>
                     @endfor
-                    </div>
-
-                
-                	@endfor
-                	</div> 
+                @else
+                        @for($i = 0;$i < count($equipos); $i++)
+                        <div class='wrapper-equipo'>
+                            {{Form::hidden('id_equipo_'.$i , $equipos[$i]['id'] , ['data-equipo' => $i])}}
+                            <div>
+                                {{Form::text('nombre_equipo_'.$i , $equipos[$i]['nombre'] , ['placeholder' => 'Nombre de equipo' , 'data-equipo' => $i])}}
+                            </div>
+                                @if($errors->has('nombre_equipo_'.$i))
+                                <div>
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('nombre_equipo_'.$i) }}</strong>
+                                    </span>
+                                </div>
+                                @endif
+                            <div>
+                                {{Form::text('representantes_email_equipo_'.$i , $equipos[$i]['integrantes'][0]['email'] , ['placeholder' => 'Email de representante'])}}
+                            </div>
+                                @if($errors->has('representantes_email_equipo_'.$i))
+                                <div>
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('representantes_email_equipo_'.$i) }}</strong>
+                                    </span>
+                                </div>
+                                @endif
+                            <button class="agregar-jugador" data-equipo="{{$i}}">
+                                Agregar jugador
+                            </button>
+                            <div class="jugadores">
+                                @for($c = 0;$c < count( $equipos[$i]['integrantes']);$c++)
+                                    {{Form::text('jugador_'.$c.'_nombre_equipo_'.$i , $equipos[$i]['integrantes'][$c]['nombre'] , ['placeholder' => 'Nombre' , 'data-jugador' => $c])}}
+                                    @if($errors->has('jugador_'.$c.'_nombre_equipo_'.$i))
+                                        <div>
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('jugador_'.$c.'_nombre_equipo_'.$i) }}</strong>
+                                            </span>
+                                        </div>
+                                    @endif
+                                    {{Form::text('jugador_'.$c.'_apellido_equipo_'.$i , $equipos[$i]['integrantes'][$c]['nombre'] , ['placeholder' => 'Apellido' , 'data-jugador' => $c])}}
+                                    {{Form::hidden('id_jugador_'.$c.'_equipo_'.$i , $equipos[$i]['integrantes'][$c]['id'] , ['data-jugador' => $c])}}
+                                    @if($c != 0)
+                                        <button class='eliminar' data-jugador="{{$c}}" data-equipo="{{$i}}">Eliminar</button>
+                                    @endif
+                                    
+                                    @if($errors->has('jugador_'.$c.'_apellido_equipo_'.$i))
+                                        <div>
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('jugador_'.$c.'_apellido_equipo_'.$i) }}</strong>
+                                            </span>
+                                        </div>
+                                    @endif
+                                @endfor
+                            </div>
+                        </div>                            
+                        @endfor
                 @endif
             </div>
+            <!-- fin equipos -->
+           
 
         </section>
             <section id="paso-cuatro" class="container">

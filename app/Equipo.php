@@ -35,5 +35,9 @@ class Equipo extends Model
         return Equipo::where('torneos_id' , '=' , $idTorneo) -> get() -> toArray();
     } 
 
+    public static function equiposConTorneo($idTorneo, $idEquipo)
+    {
+        return Equipo::join('torneos', 'torneos.id' , '=' , 'equipos.torneos_id') -> where('torneos.id' , '=' , $idTorneo) -> where('equipos.id' , '=' , $idEquipo) -> select('equipos.*') -> get() -> toArray();
+    }
 
 }

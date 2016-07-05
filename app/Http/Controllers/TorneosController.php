@@ -38,10 +38,10 @@ class TorneosController extends Controller
         $torneo = Torneo::getOne($idTorneo , $user['id']) -> toArray();
         $teams = Equipo::getEquipos($idTorneo);
         $integrantes = User::players();
-        //$equipos = VerTorneos::armarEquipos($teams , $integrantes);
-        //$countEquipos = VerTorneos::countEquipos($equipos);
-        //return view('sections.torneos-editar' , compact('torneo' , 'equipos' , 'user' , 'countEquipos'));
-        return dd($integrantes);
+        $equipos = VerTorneos::armarEquipos($teams , $integrantes);
+        $countEquipos = VerTorneos::countEquipos($equipos);
+        return view('sections.torneos-editar' , compact('torneo' , 'equipos' , 'user' , 'countEquipos'));
+        //return dd($equipos);
     }
     public function eliminar($id)
     {
@@ -91,23 +91,29 @@ class TorneosController extends Controller
         $dataTorneo = CrearTorneo::generarDataValidaciones($dataTorneo , $request -> input());
         $equiposCount = CrearTorneo::contarEquipos($request -> input());
 
-        /*
+        
         //proceso todas las reglas y datos dinamicos        
 
         //ejecuto el validador
-        $validator = Validator::make($dataTorneo , $reglas , $messages);
+        /*$validator = Validator::make($dataTorneo , $reglas , $messages);
         //ejecuto el validador
 
         //evaluo si los datos no son validos
         if($validator -> fails())
         {
            return redirect()-> back() -> withInput($request -> input())->with('equipos' , $equiposCount)->withErrors($validator);
-        }
+        }*/
         //evaluo si los datos no son validos
         
         //parseo equipos
         $equipos = CrearTorneo::parse($request -> input());
+		//return dd($equipos);
+        
+        
+        
 
+        //return dd($equipos);
+       
         $check = Torneo::with('persona') -> where('id' , $request -> input('id_torneo')) -> limit(1) -> get() -> toArray();
         if(!empty($check)){
             
@@ -128,6 +134,10 @@ class TorneosController extends Controller
                     'max_equipos' => $request -> input('max_equipos')                 
                     ]);
                     
+
+        
+
+
                     \DB::commit();
                       return redirect('/torneos/'.$request -> input('id_torneo'))->withInput($request -> input())->with('exito' , true);
                     return 'exito';
@@ -141,7 +151,7 @@ class TorneosController extends Controller
         }else{
             return redirect() -> back() ->withInput($request -> input())->with('error_torneo' , true);
         }
-*/
+
 
 
     }
@@ -195,18 +205,19 @@ class TorneosController extends Controller
         //ejecuto el validador
         $validator = Validator::make($dataTorneo , $reglas , $messages);
         //ejecuto el validador
-       
+       	
         //evaluo si los datos no son validos
         if($validator -> fails())
         {
-           return redirect('/crear-torneo')->withInput($request -> input())->with('equipos' , $equiposCount)->withErrors($validator);
+           return redirect()->back()->withInput($request -> input())->with('equipos' , $equiposCount);//->withErrors($validator);
         }
         //evaluo si los datos no son validos
         
         //parseo equipos
         $equipos = CrearTorneo::parse($request -> input());
         //parseo equipos
-        
+        //dd($equipos);
+        /*
         \DB::beginTransaction();
         //creo el torneo
         try {
@@ -306,7 +317,7 @@ class TorneosController extends Controller
         } catch (Exception $e) {
             \DB::rollback();
             dd($e);
-        }
+        }*/
 
        }
 }
